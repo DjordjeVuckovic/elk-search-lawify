@@ -1,0 +1,6 @@
+@Lawify.Content_HostAddress = http://localhost:5119
+
+GET {{Lawify.Content_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

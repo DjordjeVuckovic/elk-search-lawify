@@ -1,0 +1,68 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lawify.ContentImporter.Api", "ContentImporter\Lawify.ContentImporter.Api\Lawify.ContentImporter.Api.csproj", "{4B1619F4-A98C-4A94-9BD5-943C173BF7D0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ContentImporter", "ContentImporter", "{699978B3-84BA-476F-BD91-DA501FFB68F4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Content", "Content", "{46E043DA-0C79-4F30-AB0A-33F746BBB52A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lawify.Content.Api", "Content\Lawify.Content.Api\Lawify.Content.Api.csproj", "{05E2275C-AF9C-4BD2-88B6-43665996EC6A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ContentDispatchingProcessor", "ContentDispatchingProcessor", "{07606E2A-54E6-42AA-80D8-1795412CE88B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lawify.ContentDispatchingProcessor.Api", "ContentDispatchingProcessor\Lawify.ContentDispatchingProcessor.Api\Lawify.ContentDispatchingProcessor.Api.csproj", "{3F3417E1-938C-4C47-A9F3-24211D07F472}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Search", "Search", "{3C00B949-F42E-4875-ACE7-C5AD0DB9A333}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lawify.Search.Api", "Search\Lawify.Search.Api\Lawify.Search.Api.csproj", "{0848FA9A-C3C0-4B8C-85A8-A7123EEDE77F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{65BF14B8-DA5C-42DA-B289-FC2814F7B099}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lawify.Common", "Common\Lawify.Common\Lawify.Common.csproj", "{64F49070-C8E3-4056-A414-3553FCA54A05}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{10B81303-4159-4EBB-9643-CE481A7B8F52}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LawSearchUI", "LawSearchUI", "{5AA0D512-A520-4527-9D41-812859726A5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lawify.Identiity.Api", "Identity\Lawify.Identiity.Api\Lawify.Identiity.Api.csproj", "{76A8A1EC-116E-43C7-B110-75F170190F0A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4B1619F4-A98C-4A94-9BD5-943C173BF7D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B1619F4-A98C-4A94-9BD5-943C173BF7D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B1619F4-A98C-4A94-9BD5-943C173BF7D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B1619F4-A98C-4A94-9BD5-943C173BF7D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05E2275C-AF9C-4BD2-88B6-43665996EC6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05E2275C-AF9C-4BD2-88B6-43665996EC6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05E2275C-AF9C-4BD2-88B6-43665996EC6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05E2275C-AF9C-4BD2-88B6-43665996EC6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F3417E1-938C-4C47-A9F3-24211D07F472}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F3417E1-938C-4C47-A9F3-24211D07F472}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F3417E1-938C-4C47-A9F3-24211D07F472}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F3417E1-938C-4C47-A9F3-24211D07F472}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0848FA9A-C3C0-4B8C-85A8-A7123EEDE77F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0848FA9A-C3C0-4B8C-85A8-A7123EEDE77F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0848FA9A-C3C0-4B8C-85A8-A7123EEDE77F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0848FA9A-C3C0-4B8C-85A8-A7123EEDE77F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64F49070-C8E3-4056-A414-3553FCA54A05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64F49070-C8E3-4056-A414-3553FCA54A05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64F49070-C8E3-4056-A414-3553FCA54A05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64F49070-C8E3-4056-A414-3553FCA54A05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76A8A1EC-116E-43C7-B110-75F170190F0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76A8A1EC-116E-43C7-B110-75F170190F0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76A8A1EC-116E-43C7-B110-75F170190F0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76A8A1EC-116E-43C7-B110-75F170190F0A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4B1619F4-A98C-4A94-9BD5-943C173BF7D0} = {699978B3-84BA-476F-BD91-DA501FFB68F4}
+		{05E2275C-AF9C-4BD2-88B6-43665996EC6A} = {46E043DA-0C79-4F30-AB0A-33F746BBB52A}
+		{3F3417E1-938C-4C47-A9F3-24211D07F472} = {07606E2A-54E6-42AA-80D8-1795412CE88B}
+		{0848FA9A-C3C0-4B8C-85A8-A7123EEDE77F} = {3C00B949-F42E-4875-ACE7-C5AD0DB9A333}
+		{64F49070-C8E3-4056-A414-3553FCA54A05} = {65BF14B8-DA5C-42DA-B289-FC2814F7B099}
+		{76A8A1EC-116E-43C7-B110-75F170190F0A} = {10B81303-4159-4EBB-9643-CE481A7B8F52}
+	EndGlobalSection
+EndGlobal
