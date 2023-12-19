@@ -1,1 +1,58 @@
 ﻿version: '3.8'
+services:
+  # Elasticsearch
+  elk-elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.3
+    container_name: elk-elasticsearch
+    environment:
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "discovery.type=single-node"
+      - xpack.security.enabled=false
+    ports:
+      - "9200:9200"
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    networks:
+      - search-net
+
+  # Kibana
+  elk-kibana:
+    image: docker.elastic.co/kibana/kibana:8.11.3
+    container_name: elk-kibana
+    ports:
+      - "5601:5601"
+    environment:
+      ELASTICSEARCH_URL: http://elk-elasticsearch:9200
+      ELASTICSEARCH_HOSTS: '["http://elk-elasticsearch:9200"]'
+    networks:
+      - search-net
+    depends_on:
+      - elk-elasticsearch
+
+  # Logstash
+  elk-logstash:
+    image: docker.elastic.co/logstash/logstash:8.11.3
+    container_name: elk-logstash
+    ports:
+      - "5044:5044"
+      - "5000:5000/tcp"
+      - "5000:5000/udp"
+      - "9600:9600"
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    volumes:
+      - ./configs/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+      - ./configs/logstash/pipeline:/usr/share/logstash/pipeline:ro
+    networks:
+      - search-net
+    depends_on:
+      - elk-elasticsearch
+    
+networks:
+    search-net:
+        driver: bridge
+volumes:
+    elasticsearch-data:
+        driver: local
+    

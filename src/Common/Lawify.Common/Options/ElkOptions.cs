@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Options;
 
 namespace Lawify.Common.Options;
 
@@ -6,9 +6,9 @@ public class ElkOptions : IValidateOptions<ElkOptions>
 {
     private static readonly string[] ValidEnvironments =
     {
-        "dev",
-        "test",
-        "prod"
+        "development",
+        "staging",
+        "production"
     };
 
     public const string Elk = "ELK";

@@ -1,29 +1,52 @@
+using System.Text;
+using Carter;
 using dotenv.net;
-using Serilog.Sinks.Http.Private;
-
-var builder = WebApplication.CreateBuilder(args);
+using Lawify.Common.Middlewares;
+using Lawify.Search.Api.DependencyInjection;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 DotEnv.Fluent()
     .WithoutExceptions()
     .WithTrimValues()
-    .WithEncoding(Encoding.UTF8WithoutBom)
+    .WithEncoding(Encoding.UTF8)
     .WithoutOverwriteExistingVars()
     .Load();
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+var builder = WebApplication.CreateBuilder(args);
+
+builder.ConfigureServices();
+
+builder.Services.AddHealthChecks();
+
+builder.Services.AddCarter();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
+if (app.Environment.IsDevelopment() || app.Environment.IsStaging()) {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
+if (app.Environment.IsDevelopment()) app.UseDeveloperExceptionPage();
+
+app.UseMiddleware<ExceptionMiddleware>();
+
 app.UseHttpsRedirection();
+
+app.UseCors("CorsPolicy");
+
+app.UseRouting();
+
+app.MapHealthChecks("/health/ready", new HealthCheckOptions {
+    Predicate = check => check.Tags.Contains("ready")
+});
+
+app.MapHealthChecks("/health/live", new HealthCheckOptions());
+
+app.MapCarter();
 
 app.Run();

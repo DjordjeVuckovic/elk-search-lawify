@@ -1,0 +1,15 @@
+﻿root = true
+# C# files
+[*.cs]
+charset = utf-8
+indent_style=space
+indent_size=4
+max_line_length=160
+insert_final_newline = false
+trim_trailing_whitespace = true
+
+csharp_new_line_before_open_brace = methods, properties, types
+csharp_new_line_before_else = false
+csharp_new_line_before_catch = false
+csharp_new_line_before_finally = false
+csharp_new_line_before_members_in_object_initializers = true

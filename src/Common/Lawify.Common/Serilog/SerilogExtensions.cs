@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.Http;
@@ -9,21 +9,21 @@ public static class SerilogExtensions
 {
     private static readonly string[] ValidEnvironments =
     {
-        "dev",
-        "test", 
-        "prod"
+        "development",
+        "staging",
+        "production"
     };
-    
-    public static IHostBuilder ConfigureSerilog(
-        this IHostBuilder hostBuilder, 
-        string httpSinkRequestUri, 
-        string serviceName, 
+
+    public static void ConfigureSerilog(this IHostBuilder hostBuilder,
+        string httpSinkRequestUri,
+        string serviceName,
         string environment)
     {
         hostBuilder.UseSerilog((_, loggerConfiguration) => {
             if (!string.IsNullOrEmpty(environment) && ValidEnvironments.Contains(environment)) {
                 loggerConfiguration
-                    .WriteTo.DurableHttpUsingTimeRolledBuffers(httpSinkRequestUri,
+                    .WriteTo.DurableHttpUsingTimeRolledBuffers(
+                        httpSinkRequestUri,
                         bufferRollingInterval: BufferRollingInterval.Month,
                         restrictedToMinimumLevel: LogEventLevel.Warning,
                         logEventsInBatchLimit: 1000)
@@ -36,11 +36,7 @@ public static class SerilogExtensions
                 .Enrich.FromLogContext()
                 .Destructure.ToMaximumDepth(4)
                 .Destructure.ToMaximumStringLength(100)
-                .Destructure.ToMaximumCollectionCount(10)
-                .MinimumLevel.Override("Microsoft", LogEventLevel.Error)
-                .MinimumLevel.Override("System", LogEventLevel.Error);
+                .Destructure.ToMaximumCollectionCount(10);
         });
-
-        return hostBuilder;
     }
 }
