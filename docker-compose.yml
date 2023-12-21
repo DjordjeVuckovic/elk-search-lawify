@@ -1,1 +1,9 @@
 ﻿version: '3.8'
+name: 'lawify-container'
+services: 
+  search-api:
+    build: 
+        context: ./src
+        dockerfile: Search/Lawify.Search.Api/Dockerfile
+    ports:
+      - "5241:8080"

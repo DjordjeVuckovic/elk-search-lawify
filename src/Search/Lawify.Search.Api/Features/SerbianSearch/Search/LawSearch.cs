@@ -2,7 +2,7 @@
 using Lawify.Common.Options;
 using Microsoft.Extensions.Options;
 
-namespace Lawify.Search.Api.LawsSearch;
+namespace Lawify.Search.Api.Features.SerbianSearch.Search;
 
 public static class LawSearch
 {

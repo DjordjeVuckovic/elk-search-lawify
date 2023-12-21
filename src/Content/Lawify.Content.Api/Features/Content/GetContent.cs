@@ -15,7 +15,7 @@ public class GetContentEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapGet("api/v1/search-laws", (ILogger<GetContentEndpoint> logger, IOptions<ElkOptions> elkOptions) => {
+        app.MapGet("api/v1/content", (ILogger<GetContentEndpoint> logger, IOptions<ElkOptions> elkOptions) => {
             logger.LogInformation("ELK options: {@ElkOptions}", elkOptions);
             logger.LogError("Not working!");
             var result = Result.Failure<GetContent,ErrorResult>(ContentErrors.ContentNotFound("Not found"));

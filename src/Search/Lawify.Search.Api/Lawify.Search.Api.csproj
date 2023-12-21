@@ -11,6 +11,7 @@
     <ItemGroup>
         <PackageReference Include="Carter" Version="8.0.0" />
         <PackageReference Include="dotenv.net" Version="3.1.3" />
+        <PackageReference Include="Elastic.Clients.Elasticsearch" Version="8.11.0" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0"/>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
     </ItemGroup>
@@ -23,6 +24,11 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Common\Lawify.Common\Lawify.Common.csproj" />
+      <ProjectReference Include="..\..\Common\Lawify.Events\Lawify.Events.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Features\SearchCommon\Feature\" />
     </ItemGroup>
 
 </Project>
