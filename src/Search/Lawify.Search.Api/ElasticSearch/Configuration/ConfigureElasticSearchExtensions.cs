@@ -23,7 +23,7 @@ public static class ConfigureElasticSearchExtensions
             .EnableDebugMode();
 
         var serbianLawIndex = elkOptions.SerbianLawsIndex;
-        var serbianContractIndex = elkOptions.SerbianContractsIndex + "v1";
+        var serbianContractIndex = elkOptions.SerbianContractsIndex;
 
         settings.AddSerbianLawMappings(serbianLawIndex);
         settings.AddSerbianContractMappings(serbianContractIndex);

@@ -1,4 +1,5 @@
 ﻿using Elastic.Clients.Elasticsearch;
+using Elastic.Clients.Elasticsearch.Analysis;
 using Elastic.Clients.Elasticsearch.IndexManagement;
 using Lawify.Search.Api.Features.SerbianSearch.Contracts;
 using Lawify.Search.Api.Features.SerbianSearch.Laws;
@@ -66,17 +67,7 @@ public static class SerbianSearchExtensions
                     .KeywordMarker("serbian_keywords", km =>
                         km.Keywords(SerbianAnalyzer.Keywords))
                     .PatternReplace("serbian_normalization", pr =>
-                        pr
-                            .Pattern("č|ć")
-                            .Replacement("c")
-                            .Pattern("š")
-                            .Replacement("s")
-                            .Pattern("ž")
-                            .Replacement("z")
-                            .Pattern("đ")
-                            .Replacement("dj")
-                            .Pattern("dž")
-                            .Replacement("dz")
+                        pr.SerbianPatternTokenDescriptor()
                     )
                 ).CharFilters(cf => cf
                     .PatternReplace("char_filter", pr => pr
@@ -87,5 +78,19 @@ public static class SerbianSearchExtensions
             )
         );
         return descriptor;
+    }
+    private static void SerbianPatternTokenDescriptor(this PatternReplaceTokenFilterDescriptor descriptor)
+    {
+        descriptor
+            .Pattern("č|ć")
+            .Replacement("c")
+            .Pattern("š")
+            .Replacement("s")
+            .Pattern("ž")
+            .Replacement("z")
+            .Pattern("đ")
+            .Replacement("dj")
+            .Pattern("dž")
+            .Replacement("dz");
     }
 }

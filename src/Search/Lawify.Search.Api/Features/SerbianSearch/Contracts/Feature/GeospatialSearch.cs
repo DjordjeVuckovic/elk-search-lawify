@@ -8,7 +8,7 @@ public class GeospatialSearch
     public record Query(
         string Street,
         string City,
-        string RadiumKm
+        string RadiusKm
     ) : IRequest<IReadOnlyCollection<SerbianContract>>;
 
     public class Handler(ElasticsearchClient elasticsearchClient)
@@ -26,7 +26,7 @@ public class GeospatialSearch
                 s.Query(q => q
                     .GeoDistance(g => g
                         .Field(f => f.GeoLocation)
-                        .Distance($"{request.RadiumKm}km")
+                        .Distance($"{request.RadiusKm}km")
                         .Location(
                             GeoLocation.LatitudeLongitude(
                                 new LatLonGeoLocation { Lat = lat, Lon = lang }
