@@ -27,7 +27,6 @@ public static class SerilogExtensions
                         bufferRollingInterval: BufferRollingInterval.Month,
                         restrictedToMinimumLevel: LogEventLevel.Warning,
                         logEventsInBatchLimit: 1000)
-                    .Enrich.WithProperty("environment", environment)
                     .Enrich.WithProperty("serviceName", serviceName);
             }
 

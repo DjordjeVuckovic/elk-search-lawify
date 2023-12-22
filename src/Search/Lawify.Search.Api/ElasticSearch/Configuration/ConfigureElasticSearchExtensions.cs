@@ -16,25 +16,24 @@ public static class ConfigureElasticSearchExtensions
         var elkOptions = services.BuildServiceProvider().GetRequiredService<IOptions<ElasticSearchOptions>>().Value;
 
         var settings = new ElasticsearchClientSettings(new Uri(elkOptions.Uri))
-            .PrettyJson()
-            .RequestTimeout(TimeSpan.FromMinutes(TimeoutMinutes))
-            //development only
-            .DisableDirectStreaming(false)
-            .EnableDebugMode();
+            .PrettyJson();
 
         var serbianLawIndex = elkOptions.SerbianLawsIndex;
         var serbianContractIndex = elkOptions.SerbianContractsIndex;
-
-        settings.AddSerbianLawMappings(serbianLawIndex);
-        settings.AddSerbianContractMappings(serbianContractIndex);
+        settings.AddAllMappings(serbianLawIndex, serbianContractIndex);
 
         var client = new ElasticsearchClient(settings);
         services.AddSingleton(client);
 
-        client.CreateSerbianLawIndex(serbianLawIndex);
-        client.CreateSerbianContractIndex(serbianContractIndex);
+        client.CreateLawIndex(serbianLawIndex);
+        client.CreateContractIndex(serbianContractIndex);
 
         return services;
+    }
+    private static void AddAllMappings(this ElasticsearchClientSettings settings, string serbianLawIndex, string serbianContractIndex)
+    {
+        settings.AddLawMappings(serbianLawIndex);
+        settings.AddContractMappings(serbianContractIndex);
     }
 
 }

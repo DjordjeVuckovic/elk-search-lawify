@@ -9,11 +9,10 @@ namespace Lawify.Search.Api.ElasticSearch.Languages.Serbian;
 
 public static class SerbianSearchExtensions
 {
-    public static void CreateSerbianContractIndex(this ElasticsearchClient client, string indexName)
+    public static void CreateContractIndex(this ElasticsearchClient client, string indexName)
     {
-        client.Indices.Create<SerbianContract>(descriptor => descriptor
+        client.Indices.Create<Contract>(descriptor => descriptor
             .Index(indexName)
-            .AddSerbianIndexSettings()
             .Mappings(
                 m => m.Properties(p =>
                     p.GeoPoint(g => g.GeoLocation!)
@@ -22,11 +21,10 @@ public static class SerbianSearchExtensions
         );
     }
 
-    public static void CreateSerbianLawIndex(this ElasticsearchClient client, string indexName)
+    public static void CreateLawIndex(this ElasticsearchClient client, string indexName)
     {
-        client.Indices.Create<SerbianLaw>(descriptor => descriptor
+        client.Indices.Create<Law>(descriptor => descriptor
             .Index(indexName)
-            .AddSerbianIndexSettings()
             .Mappings(
                 m => m.Properties(p =>
                     p.GeoPoint(g => g.GeoLocation!)

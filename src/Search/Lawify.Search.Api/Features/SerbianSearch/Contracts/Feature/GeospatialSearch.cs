@@ -8,28 +8,25 @@ public class GeospatialSearch
     public record Query(
         string Street,
         string City,
-        string RadiusKm
-    ) : IRequest<IReadOnlyCollection<SerbianContract>>;
+        string Radius
+    ) : IRequest<IReadOnlyCollection<Contract>>;
 
     public class Handler(ElasticsearchClient elasticsearchClient)
-        : IRequestHandler<Query, IReadOnlyCollection<SerbianContract>>
+        : IRequestHandler<Query, IReadOnlyCollection<Contract>>
     {
-        public async Task<IReadOnlyCollection<SerbianContract>> Handle(
+        public async Task<IReadOnlyCollection<Contract>> Handle(
             Query request,
             CancellationToken cancellationToken
         )
         {
-            // TODO: Implement retrieving geospatial coordinates from address via LocationIQ API
-            var lat = 30.34;
-            var lang = 29.30;
-            var response = await elasticsearchClient.SearchAsync<SerbianContract>(s =>
+            var response = await elasticsearchClient.SearchAsync<Contract>(s =>
                 s.Query(q => q
                     .GeoDistance(g => g
                         .Field(f => f.GeoLocation)
-                        .Distance($"{request.RadiusKm}km")
+                        .Distance($"{request.Radius}km")
                         .Location(
                             GeoLocation.LatitudeLongitude(
-                                new LatLonGeoLocation { Lat = lat, Lon = lang }
+                                new LatLonGeoLocation { Lat = 15.15, Lon = 20.20 }
                             )
                         )
                     )

@@ -10,8 +10,7 @@ public class Highlighter
         string SearchTerm,
         string[] FieldsNameToHighlight,
         int FragmentSize,
-        List<string>? PreTags,
-        List<string>? PostTags
+        int NumberOfFragments
     ) : IRequest<IReadOnlyCollection<T>>;
 
     public class Handler<T> : IRequestHandler<Query<T>, IReadOnlyCollection<T>> where T : class
@@ -38,9 +37,7 @@ public class Highlighter
                         (current, fieldName) => current.Add(fieldName,
                             new HighlightField {
                                 FragmentSize = request.FragmentSize,
-                                NumberOfFragments = 1,
-                                PreTags = request.PreTags ?? ["<em>"],
-                                PostTags = request.PostTags ?? ["</em>"]
+                                NumberOfFragments = request.NumberOfFragments,
                             }))
                     )
                 ), cancellationToken);
