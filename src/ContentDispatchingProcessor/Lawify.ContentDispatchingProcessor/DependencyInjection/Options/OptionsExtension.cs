@@ -1,7 +1,7 @@
 using Lawify.Common.DependencyInjection;
 using Lawify.Common.Options;
 
-namespace Lawify.ContentDispatchingProcessor.Api.DependencyInjection.Options;
+namespace Lawify.ContentDispatchingProcessor.DependencyInjection.Options;
 
 public static class OptionsExtension
 {

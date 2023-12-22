@@ -10,7 +10,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lawify.Content.Api", "Conte
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ContentDispatchingProcessor", "ContentDispatchingProcessor", "{07606E2A-54E6-42AA-80D8-1795412CE88B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lawify.ContentDispatchingProcessor.Api", "ContentDispatchingProcessor\Lawify.ContentDispatchingProcessor.Api\Lawify.ContentDispatchingProcessor.Api.csproj", "{3F3417E1-938C-4C47-A9F3-24211D07F472}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lawify.ContentDispatchingProcessor", "ContentDispatchingProcessor\Lawify.ContentDispatchingProcessor\Lawify.ContentDispatchingProcessor.csproj", "{3F3417E1-938C-4C47-A9F3-24211D07F472}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Search", "Search", "{3C00B949-F42E-4875-ACE7-C5AD0DB9A333}"
 EndProject

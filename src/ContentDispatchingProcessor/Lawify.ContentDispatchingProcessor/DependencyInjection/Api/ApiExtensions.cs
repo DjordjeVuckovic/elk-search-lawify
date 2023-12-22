@@ -1,4 +1,4 @@
-namespace Lawify.ContentDispatchingProcessor.Api.DependencyInjection.Api;
+namespace Lawify.ContentDispatchingProcessor.DependencyInjection.Api;
 
 internal static class ApiExtensions
 {

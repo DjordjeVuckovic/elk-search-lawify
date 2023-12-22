@@ -1,10 +1,10 @@
 using Lawify.Common.Options;
 using Lawify.Common.Serilog;
-using Lawify.ContentDispatchingProcessor.Api.DependencyInjection.Api;
-using Lawify.ContentDispatchingProcessor.Api.DependencyInjection.Options;
+using Lawify.ContentDispatchingProcessor.DependencyInjection.Api;
+using Lawify.ContentDispatchingProcessor.DependencyInjection.Options;
 using Microsoft.Extensions.Options;
 
-namespace Lawify.ContentDispatchingProcessor.Api.DependencyInjection;
+namespace Lawify.ContentDispatchingProcessor.DependencyInjection;
 
 public static class WebApplicationBuilderExtensions
 {
