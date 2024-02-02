@@ -27,8 +27,4 @@
       <ProjectReference Include="..\..\Common\Lawify.Messaging.Events\Lawify.Messaging.Events.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="MessageBroker\" />
-    </ItemGroup>
-
 </Project>

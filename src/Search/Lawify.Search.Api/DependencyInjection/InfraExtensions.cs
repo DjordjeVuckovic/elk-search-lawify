@@ -1,6 +1,14 @@
-﻿namespace Lawify.Search.Api.DependencyInjection;
+﻿using Lawify.Search.Api.MessageBroker.Extensions;
 
-public class InfraExtensions
+namespace Lawify.Search.Api.DependencyInjection;
+
+public static class InfraExtensions
 {
-    
+    public static IServiceCollection AddInfra(this IServiceCollection services, IConfiguration configuration)
+    {
+        services
+            .AddMessageBroker();
+
+        return services;
+    }
 }

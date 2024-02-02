@@ -7,12 +7,11 @@ namespace Lawify.Common.Serilog;
 
 public static class SerilogExtensions
 {
-    private static readonly string[] ValidEnvironments =
-    {
+    private static readonly string[] ValidEnvironments = [
         "development",
         "staging",
         "production"
-    };
+    ];
 
     public static void ConfigureSerilog(this IHostBuilder hostBuilder,
         string httpSinkRequestUri,
@@ -26,7 +25,8 @@ public static class SerilogExtensions
                         httpSinkRequestUri,
                         bufferRollingInterval: BufferRollingInterval.Month,
                         restrictedToMinimumLevel: LogEventLevel.Warning,
-                        logEventsInBatchLimit: 1000)
+                        logEventsInBatchLimit: 1000
+                    )
                     .Enrich.WithProperty("environment", environment)
                     .Enrich.WithProperty("serviceName", serviceName);
             }

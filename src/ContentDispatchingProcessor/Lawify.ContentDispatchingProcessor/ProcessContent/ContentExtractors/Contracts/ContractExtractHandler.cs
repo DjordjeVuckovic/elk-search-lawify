@@ -1,7 +1,7 @@
 ﻿using Lawify.ContentDispatchingProcessor.Common.Files;
 using MediatR;
 
-namespace Lawify.ContentDispatchingProcessor.ContentExtractors.Contracts;
+namespace Lawify.ContentDispatchingProcessor.ProcessContent.ContentExtractors.Contracts;
 
 public record ContractForExtract(FileContent FileContent) : INotification;
 

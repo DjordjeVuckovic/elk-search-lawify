@@ -14,7 +14,10 @@ public static class WebApplicationBuilderExtensions
             .AddInfra(builder.Configuration)
             .AddCore();
 
-        var elkOptions = builder.Services.BuildServiceProvider().GetRequiredService<IOptions<ElkOptions>>().Value;
+        var elkOptions = builder.Services
+            .BuildServiceProvider()
+            .GetRequiredService<IOptions<ElkOptions>>().Value;
+
         builder.Host.ConfigureSerilog(
             elkOptions.HttpSinkRequestUri,
             elkOptions.ServiceName,

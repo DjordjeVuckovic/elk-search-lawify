@@ -1,6 +1,6 @@
 ﻿using Lawify.ContentDispatchingProcessor.Common.Files;
-using Lawify.ContentDispatchingProcessor.ContentExtractors.Contracts;
-using Lawify.ContentDispatchingProcessor.ContentExtractors.Laws;
+using Lawify.ContentDispatchingProcessor.ProcessContent.ContentExtractors.Contracts;
+using Lawify.ContentDispatchingProcessor.ProcessContent.ContentExtractors.Laws;
 using Lawify.Messaging.Events.Contents;
 using MediatR;
 using Minio;

@@ -3,7 +3,7 @@ using Lawify.Messaging.Events.Laws;
 using MassTransit;
 using MediatR;
 
-namespace Lawify.ContentDispatchingProcessor.ContentExtractors.Laws;
+namespace Lawify.ContentDispatchingProcessor.ProcessContent.ContentExtractors.Laws;
 
 public record LawForExtract(FileContent Content) : INotification;
 

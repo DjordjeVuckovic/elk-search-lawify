@@ -1,12 +1,12 @@
 ﻿using System.Diagnostics.Contracts;
 using Lawify.Content.Api.Configuration;
 using Lawify.ContentDispatchingProcessor.Configuration;
-using Lawify.ContentDispatchingProcessor.ContentExtractors;
-using Lawify.ContentDispatchingProcessor.ContentExtractors.Contracts;
-using Lawify.ContentDispatchingProcessor.ContentExtractors.Laws;
 using Lawify.ContentDispatchingProcessor.MessageBroker.Extensions;
+using Lawify.ContentDispatchingProcessor.ProcessContent.ContentExtractors;
+using Lawify.ContentDispatchingProcessor.ProcessContent.ContentExtractors.Contracts;
+using Lawify.ContentDispatchingProcessor.ProcessContent.ContentExtractors.Laws;
 using Minio;
-using Contract = Lawify.ContentDispatchingProcessor.ContentExtractors.Contracts.Contract;
+using Contract = Lawify.ContentDispatchingProcessor.ProcessContent.ContentExtractors.Contracts.Contract;
 
 namespace Lawify.ContentDispatchingProcessor.DependencyInjection;
 

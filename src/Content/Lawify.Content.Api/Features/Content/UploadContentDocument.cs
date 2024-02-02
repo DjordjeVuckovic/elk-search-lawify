@@ -46,6 +46,7 @@ public class UploadContentDocument
                 .WithStreamData(request.File.OpenReadStream())
                 .WithContentType(request.File.ContentType)
                 .WithBucket(request.BucketName);
+
             try {
                 await minioClient
                     .PutObjectAsync(

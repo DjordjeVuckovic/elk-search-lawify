@@ -11,7 +11,6 @@ public class UploadContentConsumer(
 {
     public async Task Consume(ConsumeContext<UploadedContent> context)
     {
-        await Task.CompletedTask;
         var message = context.Message;
         logger.LogInformation("Message received: {@Message}", message);
         await mediator.Publish(

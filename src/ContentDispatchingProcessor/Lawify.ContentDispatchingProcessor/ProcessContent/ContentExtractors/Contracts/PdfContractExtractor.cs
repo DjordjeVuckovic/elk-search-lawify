@@ -1,7 +1,7 @@
 ﻿using CSharpFunctionalExtensions;
 using Lawify.ContentDispatchingProcessor.Common.Files;
 
-namespace Lawify.ContentDispatchingProcessor.ContentExtractors.Contracts;
+namespace Lawify.ContentDispatchingProcessor.ProcessContent.ContentExtractors.Contracts;
 
 public class PdfContractExtractor : IContentExtractor<Contract>
 {
