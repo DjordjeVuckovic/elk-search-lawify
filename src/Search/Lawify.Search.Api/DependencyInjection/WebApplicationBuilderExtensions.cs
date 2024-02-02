@@ -1,8 +1,5 @@
 using Lawify.Common.Options;
 using Lawify.Common.Serilog;
-using Lawify.Search.Api.DependencyInjection.Api;
-using Lawify.Search.Api.DependencyInjection.Mediator;
-using Lawify.Search.Api.DependencyInjection.Options;
 using Lawify.Search.Api.ElasticSearch.Configuration;
 using Microsoft.Extensions.Options;
 
@@ -16,7 +13,7 @@ public static class WebApplicationBuilderExtensions
             .AddOptionsEnv(builder.Configuration)
             .AddApi()
             .AddElasticSearch()
-            .AddMediator();
+            .AddCore();
 
         var elkOptions = builder.Services.BuildServiceProvider().GetRequiredService<IOptions<ElkOptions>>().Value;
         builder.Host.ConfigureSerilog(

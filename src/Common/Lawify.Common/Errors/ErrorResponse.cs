@@ -1,3 +1,3 @@
 ﻿namespace Lawify.Common.Errors;
 
-public record ErrorResponse(string Error,ErrorCode Code, string? Description, DateTime Timestamp);
+public record ErrorResponse(string Message,ErrorCode Code, string? Description, DateTime Timestamp);

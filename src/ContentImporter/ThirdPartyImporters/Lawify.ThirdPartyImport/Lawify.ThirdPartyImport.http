@@ -1,0 +1,6 @@
+@Lawify.ThirdPartyImport_HostAddress = http://localhost:5125
+
+GET {{Lawify.ThirdPartyImport_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

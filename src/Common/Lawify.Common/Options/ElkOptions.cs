@@ -4,12 +4,11 @@ namespace Lawify.Common.Options;
 
 public class ElkOptions : IValidateOptions<ElkOptions>
 {
-    private static readonly string[] ValidEnvironments =
-    {
+    private static readonly string[] ValidEnvironments = [
         "development",
         "staging",
         "production"
-    };
+    ];
 
     public const string Elk = "ELK";
     public string HttpSinkRequestUri { get; init; } = string.Empty;

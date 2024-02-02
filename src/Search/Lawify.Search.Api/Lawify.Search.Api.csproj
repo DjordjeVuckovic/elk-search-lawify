@@ -24,11 +24,11 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Common\Lawify.Common\Lawify.Common.csproj" />
-      <ProjectReference Include="..\..\Common\Lawify.Events\Lawify.Events.csproj" />
+      <ProjectReference Include="..\..\Common\Lawify.Messaging.Events\Lawify.Messaging.Events.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Features\SearchCommon\Feature\" />
+      <Folder Include="MessageBroker\" />
     </ItemGroup>
 
 </Project>

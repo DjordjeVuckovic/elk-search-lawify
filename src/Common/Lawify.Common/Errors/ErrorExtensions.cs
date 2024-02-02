@@ -12,6 +12,11 @@ public static class ErrorExtensions
         var statusCode = error.Error.StatusCode.HasValue ? error.Error.StatusCode.Value  : ErrorCode.Conflict;
         var description = error.Error.Description.GetValueOrDefault();
         var errorResponse = new ErrorResponse(error.Error.Error, statusCode, description, DateTime.UtcNow);
+        return ErrorResponse(statusCode, errorResponse);
+    }
+
+    private static IResult ErrorResponse(ErrorCode statusCode, ErrorResponse errorResponse)
+    {
         return statusCode switch {
             ErrorCode.BadRequest => Results.BadRequest(errorResponse),
             ErrorCode.Unauthorized => Results.Unauthorized(),

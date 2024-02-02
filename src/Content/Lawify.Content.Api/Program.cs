@@ -22,6 +22,7 @@ builder.Services.AddCarter();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -46,7 +47,7 @@ app.MapHealthChecks("/health/ready", new HealthCheckOptions {
 
 app.MapHealthChecks("/health/live", new HealthCheckOptions());
 
+
 app.MapCarter();
-app.UseHttpsRedirection();
 
 app.Run();
