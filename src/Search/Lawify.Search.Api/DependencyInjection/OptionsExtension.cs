@@ -10,6 +10,7 @@ public static class OptionsExtension
     {
         services.BindOption<ElkOptions>(configuration, ElkOptions.Elk);
         services.BindOption<ElasticSearchOptions>(configuration, ElasticSearchOptions.Els);
+        services.BindOption<RabbitMqOptions>(configuration, RabbitMqOptions.RabbitMq);
         return services;
     }
 }

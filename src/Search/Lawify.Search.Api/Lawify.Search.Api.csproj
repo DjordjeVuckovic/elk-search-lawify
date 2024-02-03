@@ -27,4 +27,9 @@
       <ProjectReference Include="..\..\Common\Lawify.Messaging.Events\Lawify.Messaging.Events.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Common\" />
+      <Folder Include="Features\SerbianSearch\Contracts\Feature\Create\" />
+    </ItemGroup>
+
 </Project>

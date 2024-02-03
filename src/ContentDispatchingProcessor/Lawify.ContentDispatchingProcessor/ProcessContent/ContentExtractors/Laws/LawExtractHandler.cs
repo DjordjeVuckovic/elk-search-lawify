@@ -14,10 +14,26 @@ public class LawExtractHandler(
 {
     public async Task Handle(LawForExtract notification, CancellationToken cancellationToken)
     {
-        var law = await contentExtractor.ExtractContentAsync(notification.Content, cancellationToken);
+        var law = await contentExtractor
+            .ExtractContentAsync(notification.Content, cancellationToken);
         if (law.IsFailure) {
             return;
         }
-        await publishEndpoint.Publish(new LawExported(law.Value.Content), cancellationToken);
+
+        var lawMetadata = law.Value.Metadata;
+        var metadata = new LawExportedMetadata(
+            lawMetadata.Title,
+            lawMetadata.FileName,
+            lawMetadata.CreatedAt,
+            lawMetadata.Author,
+            lawMetadata.Category
+        );
+        await publishEndpoint.Publish(
+            new LawExported(
+                law.Value.Content,
+                metadata
+            ),
+            cancellationToken
+        );
     }
 }

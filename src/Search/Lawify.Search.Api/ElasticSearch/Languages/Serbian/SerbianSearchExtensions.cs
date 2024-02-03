@@ -27,11 +27,6 @@ public static class SerbianSearchExtensions
         client.Indices.Create<SerbianLaw>(descriptor => descriptor
             .Index(indexName)
             .AddSerbianIndexSettings()
-            .Mappings(
-                m => m.Properties(p =>
-                    p.GeoPoint(g => g.GeoLocation!)
-                )
-            )
         );
     }
 

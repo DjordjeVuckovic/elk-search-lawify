@@ -13,9 +13,13 @@ public static class WebApplicationBuilderExtensions
             .AddOptionsEnv(builder.Configuration)
             .AddApi()
             .AddElasticSearch()
-            .AddCore();
+            .AddCore()
+            .AddInfra(builder.Configuration);
 
-        var elkOptions = builder.Services.BuildServiceProvider().GetRequiredService<IOptions<ElkOptions>>().Value;
+        var elkOptions = builder.Services
+            .BuildServiceProvider()
+            .GetRequiredService<IOptions<ElkOptions>>().Value;
+
         builder.Host.ConfigureSerilog(
             elkOptions.HttpSinkRequestUri,
             elkOptions.ServiceName,

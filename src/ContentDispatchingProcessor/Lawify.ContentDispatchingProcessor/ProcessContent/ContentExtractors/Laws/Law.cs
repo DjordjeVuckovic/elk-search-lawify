@@ -1,3 +1,11 @@
 ﻿namespace Lawify.ContentDispatchingProcessor.ProcessContent.ContentExtractors.Laws;
 
-public record Law(string Content);
+public record Law(string Content, LawMetadata Metadata);
+
+public record LawMetadata(
+    string Title,
+    string FileName,
+    DateTime CreatedAt,
+    string? Author,
+    string? Category
+);
