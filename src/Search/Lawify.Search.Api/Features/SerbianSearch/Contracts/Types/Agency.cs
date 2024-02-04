@@ -2,4 +2,4 @@
 
 namespace Lawify.Search.Api.Features.SerbianSearch.Contracts.Types;
 
-public record Agency(string Name,string Phone, string Email, Address? Address);
+public record Agency(string? Phone, string? Email);

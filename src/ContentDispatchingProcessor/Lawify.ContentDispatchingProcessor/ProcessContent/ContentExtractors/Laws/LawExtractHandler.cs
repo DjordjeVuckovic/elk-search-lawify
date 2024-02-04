@@ -1,4 +1,5 @@
 ﻿using Lawify.ContentDispatchingProcessor.Common.Files;
+using Lawify.Messaging.Events.Contents;
 using Lawify.Messaging.Events.Laws;
 using MassTransit;
 using MediatR;
@@ -8,7 +9,7 @@ namespace Lawify.ContentDispatchingProcessor.ProcessContent.ContentExtractors.La
 public record LawForExtract(FileContent Content) : INotification;
 
 public class LawExtractHandler(
-    IContentExtractor<Law> contentExtractor,
+    IContentExtractor<LawExtracted> contentExtractor,
     IPublishEndpoint publishEndpoint
 ) : INotificationHandler<LawForExtract>
 {
@@ -21,7 +22,7 @@ public class LawExtractHandler(
         }
 
         var lawMetadata = law.Value.Metadata;
-        var metadata = new LawExportedMetadata(
+        var metadata = new ContentMetadataExported(
             lawMetadata.Title,
             lawMetadata.FileName,
             lawMetadata.CreatedAt,

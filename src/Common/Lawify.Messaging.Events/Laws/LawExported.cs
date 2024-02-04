@@ -1,11 +1,5 @@
-﻿namespace Lawify.Messaging.Events.Laws;
+﻿using Lawify.Messaging.Events.Contents;
 
-public record LawExported(string Content, LawExportedMetadata ExportedMetadata);
+namespace Lawify.Messaging.Events.Laws;
 
-public record LawExportedMetadata(
-    string Title,
-    string FileName,
-    DateTime CreatedAt,
-    string? Author,
-    string? Category
-);
+public record LawExported(string Content, ContentMetadataExported ExportedMetadataExported);

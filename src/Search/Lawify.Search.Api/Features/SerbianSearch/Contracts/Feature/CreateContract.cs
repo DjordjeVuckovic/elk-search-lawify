@@ -23,7 +23,8 @@ public class CreateContract
                 Content = request.Content
             };
 
-            var response = await elasticsearchClient.IndexAsync(contract, cancellationToken);
+            var response = await elasticsearchClient
+                .IndexAsync(contract, cancellationToken);
             return response.IsValidResponse
                 ? Result.Success<Response,ErrorResult>(new Response(response.Id))
                 : Result.Failure<Response,ErrorResult>(SerbianContactError.Conflict("Failed to create contract", response.DebugInformation));

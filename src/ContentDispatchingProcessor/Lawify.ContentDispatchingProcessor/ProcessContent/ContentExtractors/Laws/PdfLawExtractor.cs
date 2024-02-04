@@ -1,18 +1,12 @@
 ﻿using CSharpFunctionalExtensions;
 using Lawify.ContentDispatchingProcessor.Common.Files;
+using Lawify.ContentDispatchingProcessor.ProcessContent.ContentExtractors.Models;
 
 namespace Lawify.ContentDispatchingProcessor.ProcessContent.ContentExtractors.Laws;
 
-public class PdfLawExtractor : IContentExtractor<Law>
+public class PdfLawExtractor(ILogger<PdfLawExtractor> logger) : IContentExtractor<LawExtracted>
 {
-    private ILogger<PdfLawExtractor> _logger;
-
-    public PdfLawExtractor(ILogger<PdfLawExtractor> logger)
-    {
-        _logger = logger;
-    }
-
-    public async Task<Result<Law>> ExtractContentAsync(FileContent file, CancellationToken cancellationToken)
+    public async Task<Result<LawExtracted>> ExtractContentAsync(FileContent file, CancellationToken cancellationToken)
     {
         var tempFilePath = Path.GetTempFileName();
         try {
@@ -24,7 +18,7 @@ public class PdfLawExtractor : IContentExtractor<Law>
 
             var pdfDocument = PdfDocument.FromFile(tempFilePath);
             var text = pdfDocument.ExtractAllText();
-            var metadata = new LawMetadata(
+            var metadata = new ContentMetadata(
                 pdfDocument.MetaData.Title,
                 file.FileName,
                 pdfDocument.MetaData.CreationDate,
@@ -32,17 +26,17 @@ public class PdfLawExtractor : IContentExtractor<Law>
                 null
             );
 
-            _logger.LogInformation("Pdf law extraction completed for {FileName} with lenght {@Info}",
+            logger.LogInformation("Pdf law extraction completed for {FileName} with lenght {@Info}",
                 file.FileName,
                 new FileInfo(tempFilePath).Length
             );
 
-            return new Law(
+            return new LawExtracted(
                 text,
                 metadata
             );
         } catch (Exception ex) {
-            _logger.LogError(ex, "Error extracting pdf law for {FileName}", file.FileName);
+            logger.LogError(ex, "Error extracting pdf law for {FileName}", file.FileName);
             throw;
         } finally {
             // Clean up the temporary file

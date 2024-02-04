@@ -17,11 +17,11 @@ public class LawExportedConsumer(
             new LawReceived(
                 law.Content,
                 new LawReceivedMetadata(
-                    law.ExportedMetadata.Title,
-                    law.ExportedMetadata.FileName,
-                    law.ExportedMetadata.CreatedAt,
-                    law.ExportedMetadata.Author,
-                    law.ExportedMetadata.Category
+                    law.ExportedMetadataExported.Title,
+                    law.ExportedMetadataExported.FileName,
+                    law.ExportedMetadataExported.CreatedAt,
+                    law.ExportedMetadataExported.Author,
+                    law.ExportedMetadataExported.Category
                 )
             ),
             cancellationToken: context.CancellationToken

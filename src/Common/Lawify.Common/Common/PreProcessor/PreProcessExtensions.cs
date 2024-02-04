@@ -1,20 +1,25 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Lawify.Search.Api.Common.PreProcessor;
+namespace Lawify.Common.Common.PreProcessor;
 
 public static partial class PreProcessExtensions
 {
+    public static string PreProcessWithoutSpecialChars(this string content)
+    {
+        var withoutSpecialChars = SpecialCharactersRegex().Replace(
+            content.Trim(), " ");
+        var normalizedSpaces = SingleSpace()
+            .Replace(withoutSpecialChars.Trim(), " ");
+
+        return normalizedSpaces;
+    }
     public static string PreProcessText(this string content)
     {
         var withoutHtml = HtmlCharRegex().Replace(content, string.Empty);
 
         var decodedHtml = System.Net.WebUtility.HtmlDecode(withoutHtml);
 
-        // Replace newline, carriage return, and tab characters with space
-        var withoutSpecialChars = SpecialCharactersRegex().Replace(
-            decodedHtml, " ");
-
-        return withoutSpecialChars;
+        return decodedHtml.PreProcessWithoutSpecialChars();
     }
 
     [GeneratedRegex("<.*?>")]
@@ -22,4 +27,6 @@ public static partial class PreProcessExtensions
 
     [GeneratedRegex(@"\t|\n|\r|\s+|[^a-zA-Z0-9\s]")]
     private static partial Regex SpecialCharactersRegex();
+    [GeneratedRegex(@"\s+")]
+    private static partial Regex SingleSpace();
 }

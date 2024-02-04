@@ -1,6 +1,7 @@
 ﻿using Elastic.Clients.Elasticsearch;
 using Elastic.Clients.Elasticsearch.Analysis;
 using Elastic.Clients.Elasticsearch.IndexManagement;
+using Elastic.Clients.Elasticsearch.Mapping;
 using Lawify.Search.Api.Features.SerbianSearch.Contracts;
 using Lawify.Search.Api.Features.SerbianSearch.Laws;
 using GeoLocation = Lawify.Search.Api.Features.SerbianSearch.Shared.Types.GeoLocation;
@@ -13,11 +14,29 @@ public static class SerbianSearchExtensions
     {
         client.Indices.Create<SerbianContract>(descriptor => descriptor
             .Index(indexName)
-            .AddSerbianIndexSettings()
             .Mappings(
-                m => m.Properties(p =>
-                    p.GeoPoint(g => g.GeoLocation!)
-                )
+                m => m.Properties(p => {
+                            p.Object(o => o.AgencyAddress!);
+                            p.GeoPoint(g => g.GeoLocation!);
+                            p.Object(o => o.GovernmentAddress!);
+                            p.Text(t => t.AgencyAddress!.City!,
+                                propertyDescriptor => propertyDescriptor
+                                    .Analyzer("serbian")
+                                    .SearchAnalyzer("serbian")
+                            );
+                            p.Text(t => t.AgencyAddress!.Street!,
+                                propertyDescriptor => propertyDescriptor
+                                    .Analyzer("serbian")
+                                    .SearchAnalyzer("serbian")
+                            );
+                            p.Text(t => t.AgencyAddress!.Number!,
+                                propertyDescriptor => propertyDescriptor
+                                    .Analyzer("serbian")
+                                    .SearchAnalyzer("serbian")
+                            );
+                        }
+                    )
+                    .Enabled()
             )
         );
     }
@@ -26,7 +45,17 @@ public static class SerbianSearchExtensions
     {
         client.Indices.Create<SerbianLaw>(descriptor => descriptor
             .Index(indexName)
-            .AddSerbianIndexSettings()
+            .Settings(x =>
+                x.Analysis(a => {
+                    a.Analyzers(ad => ad.Keyword("serbian"));
+                    a.TokenFilters(tf =>
+                        tf.Stemmer("serbian_stemmer",
+                            st => st.Language("serbian"))
+                    );
+                }))
+            .Mappings(m =>
+                m.Properties(x => x.Keyword(lw => lw.Content, propertyDescriptor => propertyDescriptor.IndexOptions(new IndexOptions())))
+            )
         );
     }
 
@@ -74,6 +103,7 @@ public static class SerbianSearchExtensions
         );
         return descriptor;
     }
+
     private static void SerbianPatternTokenDescriptor(this PatternReplaceTokenFilterDescriptor descriptor)
     {
         descriptor

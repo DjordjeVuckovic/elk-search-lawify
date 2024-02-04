@@ -4,6 +4,7 @@ using Lawify.Search.Api.ElasticSearch.Mappings;
 using Lawify.Search.Api.Features.SerbianSearch.Contracts;
 using Lawify.Search.Api.Features.SerbianSearch.Laws;
 using Microsoft.Extensions.Options;
+using Serilog;
 
 namespace Lawify.Search.Api.ElasticSearch.Configuration;
 
@@ -20,7 +21,9 @@ public static class ConfigureElasticSearchExtensions
             .RequestTimeout(TimeSpan.FromMinutes(TimeoutMinutes))
             //development only
             .DisableDirectStreaming(false)
-            .EnableDebugMode();
+            .EnableDebugMode(x => {
+                Log.Information("Elasticsearch request: {@RequestBody}", x);
+            });
 
         var serbianLawIndex = elkOptions.SerbianLawsIndex;
         var serbianContractIndex = elkOptions.SerbianContractsIndex;

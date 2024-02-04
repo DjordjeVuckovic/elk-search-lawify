@@ -16,7 +16,8 @@ public class CreateLawHandler(
             notification.Metadata.Title,
             notification.Metadata.FileName,
             notification.Metadata.CreatedAt,
-            notification.Metadata.Category
+            notification.Metadata.Category,
+            notification.Metadata.Author
         );
         var response = await elasticsearchClient.IndexAsync(law, cancellationToken);
         if (!response.IsValidResponse) {

@@ -8,8 +8,8 @@ public record LawReceived(
 ) : INotification;
 
 public record LawReceivedMetadata(
-    string Title,
-    string FileName,
+    string? Title,
+    string? FileName,
     DateTime CreatedAt,
     string? Author,
     string? Category

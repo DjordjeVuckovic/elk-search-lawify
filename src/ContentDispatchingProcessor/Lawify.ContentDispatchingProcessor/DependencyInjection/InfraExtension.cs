@@ -3,6 +3,7 @@ using Lawify.ContentDispatchingProcessor.Configuration;
 using Lawify.ContentDispatchingProcessor.MessageBroker.Extensions;
 using Lawify.ContentDispatchingProcessor.ProcessContent.ContentExtractors;
 using Lawify.ContentDispatchingProcessor.ProcessContent.ContentExtractors.Contracts;
+using Lawify.ContentDispatchingProcessor.ProcessContent.ContentExtractors.Contracts.Models;
 using Lawify.ContentDispatchingProcessor.ProcessContent.ContentExtractors.Laws;
 using Minio;
 
@@ -17,8 +18,8 @@ public static class InfraExtension
         services
             .AddMessageBroker()
             .AddMinio(configuration)
-            .AddScoped<IContentExtractor<Law>, PdfLawExtractor>()
-            .AddScoped<IContentExtractor<Contract>, PdfContractExtractor>();
+            .AddScoped<IContentExtractor<LawExtracted>, PdfLawExtractor>()
+            .AddScoped<IContentExtractor<ContractExtracted>, PdfContractExtractor>();
 
         return services;
     }
