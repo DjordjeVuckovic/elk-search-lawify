@@ -1,0 +1,247 @@
+@import "src/scss/variables";
+:root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
+  --orange: #ff922d;
+  --text-color: #f5f8f2;
+  --primary-color: hsl(225, 50%, 48%);
+  --primary-text-color: #1f3e72;
+  --shadow: 0px 23px 21px -8px rgba(136, 160, 255, 0.25);
+}
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  font-family: "Poppins", sans-serif !important;
+}
+body{
+  background: $background-black;
+}
+
+.flex-center{
+  display: flex;
+  row-gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.g-5{
+  gap: 0.5rem;
+}
+.g-1{
+  gap: 1rem;
+}
+.g-07{
+  gap: .7rem;
+}
+.g-3{
+  gap: 0.3rem;
+}
+.flex-center-align{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flex-space{
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+.flex-start{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.flex-wrap{
+  display: flex;
+  flex-wrap: wrap;
+}
+.flex-end{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.flex-space{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.flex-col-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.flex-col-start {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.flex-col-end {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+.grid-2-c{
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 1fr;
+}
+.primary-text {
+  color: #1f3e72;
+  font-weight: bold;
+  font-size: 2rem;
+}
+.primary-text-small {
+  color: #1f3e72;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.white-text{
+  color: $text-color;
+}
+.secondary-text {
+  color: rgb(140 139 139);
+  font-size: 0.9rem;
+}
+.input-base-color{
+  color: $text-color;
+  background: $input-bg;
+}
+.input-base{
+  color-scheme: dark;
+  color: $text-color;
+  background: $primary-black-bg;
+  padding: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  &::placeholder{
+    color: $text-color;
+  }
+  &:focus{
+    border: 2px solid $secondary-color-blue;
+    outline: none;
+  }
+}
+.area-height{
+  height: 10rem;
+}
+.btn-primary{
+  font-weight: 550;
+  color: $text-color;
+  background: $blue-gradient;
+  width: fit-content;
+  padding: .6rem 1.2rem;
+  border: none;
+  outline: none;
+  border-radius: 16px;
+  font-size: 14px;
+  transition: all 300ms ease-in;
+  margin-top: 0;
+  &:hover{
+    cursor: pointer;
+    opacity: 0.9;
+    background: $blue-gradient-hover;
+    box-shadow: 0 0 .7em $black;
+  }
+}
+.btn-large{
+  width: 20%;
+}
+.orange-text {
+  color: orange;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.orange-text-large {
+  color: orange;
+  font-size: 2.8rem;
+  font-weight: 600;
+}
+.orange-text-md {
+  color: orange;
+  font-size: 2.1rem;
+  font-weight: 600;
+}
+.orange-text-small {
+  color: orange;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.padding-base{
+  padding: 1.5rem;
+}
+.inner-width{
+  width: 100%;
+}
+.header{
+  font-size: 32px;
+}
+.mg-b-5{
+  margin-bottom: .5rem;
+}
+
+.mg-t-1{
+  margin-top: 1rem;
+}
+@media (min-width: 1400px) {
+  .inner-width{
+    max-width: 1280px;
+    margin: auto;
+  }
+}
+@media (min-width: 640px) {
+  .padding-base{
+    padding: 4rem;
+  }
+}
+@media (min-width: 1280px), (min-width: 768px) {
+  .padding-base {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .primary-text {
+    font-size: 1.5rem;
+  }
+  .orange-text {
+    font-size: 1.2rem;
+  }
+}
+::selection {
+  background: $secondary-color-blue;
+  color: $text-color;
+}
+
+::-webkit-scrollbar {
+  width: 11px;
+  background: $text-color;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 11px;
+  background: $secondary-color-blue;
+}
+.full-width{
+  width: 100%;
+}
+.image-container{
+  width: 30rem;
+  height: 35rem;
+  overflow: hidden;
+  border-radius: 15rem 15rem 0 0;
+  border: 8px solid rgba(255,255,255,0.12);
+  img{
+    width: 100%;
+    height: 100%;
+  }
+}
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition: background-color 600000s 0s, color 600000s 0s;
+}

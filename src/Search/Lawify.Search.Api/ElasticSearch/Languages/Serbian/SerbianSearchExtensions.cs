@@ -12,28 +12,66 @@ public static class SerbianSearchExtensions
 {
     public static void CreateSerbianContractIndex(this ElasticsearchClient client, string indexName)
     {
-        client.Indices.Create<SerbianContract>(descriptor => descriptor
+        client.Indices.Create<SerbianContractIndex>(descriptor => descriptor
             .Index(indexName)
             .Mappings(
                 m => m.Properties(p => {
-                            p.Object(o => o.AgencyAddress!);
                             p.GeoPoint(g => g.GeoLocation!);
-                            p.Object(o => o.GovernmentAddress!);
-                            p.Text(t => t.AgencyAddress!.City!,
-                                propertyDescriptor => propertyDescriptor
-                                    .Analyzer("serbian")
-                                    .SearchAnalyzer("serbian")
-                            );
-                            p.Text(t => t.AgencyAddress!.Street!,
-                                propertyDescriptor => propertyDescriptor
-                                    .Analyzer("serbian")
-                                    .SearchAnalyzer("serbian")
-                            );
-                            p.Text(t => t.AgencyAddress!.Number!,
-                                propertyDescriptor => propertyDescriptor
-                                    .Analyzer("serbian")
-                                    .SearchAnalyzer("serbian")
-                            );
+                            p.Text(x => x.Content, propertyDescriptor => {
+                                propertyDescriptor.Analyzer("serbian");
+                                propertyDescriptor.SearchAnalyzer("serbian");
+                            });
+                            p.Date(x => x.Signed!);
+                            p.Text(t => t.GovernmentSignatureName!, c => c
+                                .Analyzer("serbian")
+                                .Fields(x =>
+                                    x.Keyword(k =>
+                                        k.GovernmentSignatureSurname!, v => v
+                                        .IgnoreAbove(265)
+                                        .Suffix("keyword")))
+                                .SearchAnalyzer("serbian"));
+                            p.Text(t => t.GovernmentSignatureSurname!, c => c
+                                .Analyzer("serbian")
+                                .Fields(x =>
+                                    x.Keyword(k =>
+                                        k.GovernmentSignatureSurname!, v => v
+                                        .IgnoreAbove(265)
+                                        .Suffix("keyword")))
+                                .SearchAnalyzer("serbian"));
+                            p.Text(t => t.GovernmentSignatureFullName!, c => c
+                                .Analyzer("serbian")
+                                .Fields(x =>
+                                    x.Keyword(k =>
+                                        k.GovernmentSignatureFullName!, v => v
+                                        .IgnoreAbove(265)
+                                        .Suffix("keyword")))
+                                .SearchAnalyzer("serbian"));
+                            p.Text(t => t.GovernmentName!, c => c
+                                .Analyzer("serbian")
+                                .Fields(x =>
+                                    x.Keyword(k =>
+                                        k.GovernmentName!, v => v
+                                        .IgnoreAbove(265)
+                                        .Suffix("keyword")))
+                                .SearchAnalyzer("serbian"));
+
+                            p.Text(t => t.AgencySignatureName!, c => c
+                                .Analyzer("serbian")
+                                .Fields(x =>
+                                    x.Keyword(k =>
+                                        k.AgencySignatureName!, v => v
+                                        .IgnoreAbove(265)
+                                        .Suffix("keyword")))
+                                .SearchAnalyzer("serbian"));
+
+                            p.Text(t => t.AgencySignatureSurname!, c => c
+                                .Analyzer("serbian")
+                                .Fields(x =>
+                                    x.Keyword(k =>
+                                        k.AgencySignatureSurname!, v => v
+                                        .IgnoreAbove(265)
+                                        .Suffix("keyword")))
+                                .SearchAnalyzer("serbian"));
                         }
                     )
                     .Enabled()
@@ -43,7 +81,7 @@ public static class SerbianSearchExtensions
 
     public static void CreateSerbianLawIndex(this ElasticsearchClient client, string indexName)
     {
-        client.Indices.Create<SerbianLaw>(descriptor => descriptor
+        client.Indices.Create<SerbianLawIndex>(descriptor => descriptor
             .Index(indexName)
             .Settings(x =>
                 x.Analysis(a => {

@@ -1,0 +1,38 @@
+@import "src/scss/variables";
+.navbar-wrapper {
+  background: $black;
+  color: $text-color;
+  border-bottom: 3px solid #222529;
+}
+.navbar-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: $secondary-color;
+}
+.navbar-menu-middle {
+  gap: 2rem;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.navbar-menu-end{
+  gap: 2rem;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.logo-container{
+  padding-bottom: .5rem;
+  .image-logo{
+    cursor: pointer;
+    &:hover{
+      transform: scale(1.02);
+    }
+  }
+}
+.button-link{
+  text-decoration: none;
+  color: $text-color;
+}

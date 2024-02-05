@@ -18,7 +18,8 @@ public class ContractFactory
                 Address: new AddressExported(
                     Street: extracted.ClientAddress?.Street,
                     Number: extracted.ClientAddress?.Number,
-                    City: extracted.ClientAddress?.City
+                    City: extracted.ClientAddress?.City,
+                    FullAddress: extracted.ClientAddress?.FullAddress
                 )
             ),
             GovernmentSignature = new SignatureExported(
@@ -32,7 +33,8 @@ public class ContractFactory
                 Address: new AddressExported(
                     Street: extracted.AgencyAddress?.Street,
                     Number: extracted.AgencyAddress?.Number,
-                    City: extracted.AgencyAddress?.City
+                    City: extracted.AgencyAddress?.City,
+                    FullAddress: extracted.AgencyAddress?.FullAddress
                 )
             ),
             AgencySignature = new SignatureExported(

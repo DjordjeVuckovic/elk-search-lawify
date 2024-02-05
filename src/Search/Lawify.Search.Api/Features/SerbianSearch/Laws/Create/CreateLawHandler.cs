@@ -11,7 +11,7 @@ public class CreateLawHandler(
 {
     public async Task Handle(LawReceived notification, CancellationToken cancellationToken)
     {
-        var law = SerbianLaw.Create(
+        var law = SerbianLawIndex.Create(
             notification.Content,
             notification.Metadata.Title,
             notification.Metadata.FileName,

@@ -7,13 +7,13 @@ namespace Lawify.Search.Api.Features.SerbianSearch.Contracts.Feature;
 
 public class ProcessContractContent
 {
-    public record Query(string Keyword) : IRequest<IReadOnlyCollection<SerbianContract>>;
+    public record Query(string Keyword) : IRequest<IReadOnlyCollection<SerbianContractIndex>>;
 
-    public class Handler(ElasticsearchClient elasticsearchClient) : IRequestHandler<Query, IReadOnlyCollection<SerbianContract>>
+    public class Handler(ElasticsearchClient elasticsearchClient) : IRequestHandler<Query, IReadOnlyCollection<SerbianContractIndex>>
     {
-        public async Task<IReadOnlyCollection<SerbianContract>> Handle(Query request, CancellationToken cancellationToken)
+        public async Task<IReadOnlyCollection<SerbianContractIndex>> Handle(Query request, CancellationToken cancellationToken)
         {
-            var response = await elasticsearchClient.SearchAsync<SerbianContract>(s => s
+            var response = await elasticsearchClient.SearchAsync<SerbianContractIndex>(s => s
                 .Query(q => q
                     .Match(m => m
                         .Field(f => f.Content)

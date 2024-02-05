@@ -8,7 +8,7 @@ public static class SerbianMappingsExtensions
 {
     public static void AddSerbianLawMappings(this ElasticsearchClientSettings settings, string indexName)
     {
-        settings.DefaultMappingFor<SerbianLaw>(sw =>
+        settings.DefaultMappingFor<SerbianLawIndex>(sw =>
             sw
                 .IndexName(indexName)
                 .IdProperty(x => x.Id)
@@ -17,7 +17,7 @@ public static class SerbianMappingsExtensions
 
     public static void AddSerbianContractMappings(this ElasticsearchClientSettings settings, string indexName)
     {
-        settings.DefaultMappingFor<SerbianContract>(sc =>
+        settings.DefaultMappingFor<SerbianContractIndex>(sc =>
             sc
                 .IndexName(indexName)
                 .IdProperty(x => x.Id)

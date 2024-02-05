@@ -3,7 +3,7 @@ using Lawify.Search.Api.Features.SerbianSearch.Shared.Types;
 
 namespace Lawify.Search.Api.Features.SerbianSearch.Laws;
 
-public class SerbianLaw
+public class SerbianLawIndex
 {
     public Guid Id { get; set; }
     public string Content { get; set; } = null!;
@@ -13,10 +13,10 @@ public class SerbianLaw
 
 
 
-    public static SerbianLaw Create(
+    public static SerbianLawIndex Create(
         string content,string? title, string? fileName, DateTime createdAt,string? author, string? category)
     {
-        return new SerbianLaw {
+        return new SerbianLawIndex {
             Id = Guid.NewGuid(),
             Content = content.PreProcessText(),
             Metadata = new Metadata(title?.PreProcessText(), fileName, createdAt,author, category)

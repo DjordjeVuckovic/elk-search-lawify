@@ -1,0 +1,35 @@
+@import "src/scss/variables";
+.link{
+  color: $text-color;
+  padding: .05rem;
+  text-decoration: none;
+  position: relative;
+  &:hover{
+    cursor: pointer;
+  }
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    width: 0;
+    height: 3px;
+    background-color: $secondary-color-blue;
+    transition: width 0.3s ease-in-out;
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+}
+.button-as-link{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  outline: none;
+  border: none;
+}

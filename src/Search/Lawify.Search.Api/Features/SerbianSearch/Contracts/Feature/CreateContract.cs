@@ -17,9 +17,9 @@ public class CreateContract
     {
         public async Task<Result<Response,ErrorResult>> Handle(Command request, CancellationToken cancellationToken)
         {
-            var contract = new SerbianContract
+            var contract = new SerbianContractIndex
             {
-                Id = SerbianContract.CreateId(),
+                Id = SerbianContractIndex.CreateId(),
                 Content = request.Content
             };
 

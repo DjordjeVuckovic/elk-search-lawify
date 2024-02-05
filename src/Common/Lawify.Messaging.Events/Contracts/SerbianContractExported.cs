@@ -20,5 +20,5 @@ public record SignatureExported(string? EmployeeName, string? EmployeeSurname, s
 
 public record GovernmentExported(string? Name, string? AdministrationLevel, string? Phone, string? Email, AddressExported? Address);
 
-public record AddressExported(string? Street, string? Number, string? City);
+public record AddressExported(string? Street, string? Number, string? City, string? FullAddress);
 

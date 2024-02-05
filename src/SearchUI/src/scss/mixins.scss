@@ -1,0 +1,20 @@
+@import "./variables";
+@mixin secondary-bg{
+  background-color: rgba(26, 28, 29,0.99);
+  backdrop-filter: blur(1rem);
+  border: 2px solid rgba(255, 255, 255, 0.07);
+}
+@mixin input-base{
+  color: $text-color;
+  background: $primary-black-bg;
+  padding: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  &::placeholder{
+    color: $text-color;
+  }
+  &:focus{
+    border: 2px solid $secondary-color-blue;
+    outline: none;
+  }
+}
