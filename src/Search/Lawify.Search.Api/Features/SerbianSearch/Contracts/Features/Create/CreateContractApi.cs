@@ -6,9 +6,9 @@ using Lawify.Search.Api.Features.SerbianSearch.Contracts.Errors;
 using MediatR;
 using Result = CSharpFunctionalExtensions.Result;
 
-namespace Lawify.Search.Api.Features.SerbianSearch.Contracts.Feature;
+namespace Lawify.Search.Api.Features.SerbianSearch.Contracts.Features.Create;
 
-public class CreateContract
+public class CreateContractApi
 {
     public record Command(string Content) : IRequest<Result<Response,ErrorResult>>;
     public record Response(string Id);
@@ -36,7 +36,7 @@ public class CreateCreateContractApi : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("api/v1/serbian-contracts", async (CreateContract.Command command,ISender sender, CancellationToken cancellationToken) =>
+        app.MapPost("api/v1/serbian-contracts", async (CreateContractApi.Command command,ISender sender, CancellationToken cancellationToken) =>
         {
            var result = await sender.Send(command, cancellationToken);
            return result.IsSuccess ? Results.Ok(result.Value) : Results.Conflict(result.Error);

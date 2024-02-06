@@ -1,5 +1,6 @@
 ﻿using Lawify.Common.Common.PreProcessor;
 using Lawify.Messaging.Events.Contracts;
+using Lawify.Search.Api.Features.SerbianSearch.Contracts.Features.Dto;
 using Lawify.Search.Api.Features.SerbianSearch.Contracts.Types;
 using Lawify.Search.Api.Features.SerbianSearch.Shared.Types;
 
@@ -13,22 +14,22 @@ public class SerbianContractFactory
         var contract = new SerbianContractIndex {
             Id = SerbianContractIndex.CreateId(),
             GovernmentName = exported.Government?.Name,
-            GovernmentAdministrationLevel = exported.Government?.AdministrationLevel,
-            GovernmentPhone =  exported.Government?.Phone,
+            GovernmentLevel = exported.Government?.AdministrationLevel,
+            GovernmentPhone = exported.Government?.Phone,
             GovernmentEmail = exported.Government?.Email,
             GovernmentCity = exported.Government?.Address?.City,
-            GovernmentFullAddress = exported.Government?.Address?.FullAddress,
+            GovernmentAddress = exported.Government?.Address?.FullAddress,
             GovernmentStreetNumber = exported.Government?.Address?.Number,
             GovernmentStreet = exported.Government?.Address?.Street,
             GovernmentSignatureName = exported.GovernmentSignature?.EmployeeName,
             GovernmentSignatureSurname = exported.GovernmentSignature?.EmployeeSurname,
             GovernmentSignatureFullName = exported.GovernmentSignature?.EmployeeFullName,
-            AgencyPhone =  exported.Agency?.Phone,
+            AgencyPhone = exported.Agency?.Phone,
             AgencyEmail = exported.Agency?.Email,
             AgencyStreet = exported.Agency?.Address?.Street,
             AgencyStreetNumber = exported.Agency?.Address?.Number,
             AgencyCity = exported.Agency?.Address?.City,
-            AgencyFullAddress = exported.Agency?.Address?.FullAddress,
+            AgencyAddress = exported.Agency?.Address?.FullAddress,
             AgencySignatureName = exported.AgencySignature?.EmployeeName,
             AgencySignatureSurname = exported.AgencySignature?.EmployeeSurname,
             AgencySignatureFullName = exported.AgencySignature?.EmployeeFullName,
@@ -47,4 +48,24 @@ public class SerbianContractFactory
 
         return contract;
     }
+
+    public static ContractHitResponse ToApi(SerbianContractIndex contractHitResponse, string? highlight) =>
+        new(
+            contractHitResponse.GovernmentName,
+            contractHitResponse.GovernmentLevel,
+            contractHitResponse.AgencySignatureName,
+            contractHitResponse.AgencySignatureSurname,
+            contractHitResponse.AgencySignatureFullName,
+            highlight,
+            contractHitResponse.Content,
+            contractHitResponse.Id,
+            contractHitResponse.FileName,
+            contractHitResponse.Metadata,
+            contractHitResponse.GovernmentSignatureName,
+            contractHitResponse.GovernmentSignatureSurname,
+            contractHitResponse.GovernmentSignatureFullName,
+            contractHitResponse.GovernmentPhone,
+            contractHitResponse.GovernmentEmail,
+            contractHitResponse.GovernmentAddress
+        );
 }

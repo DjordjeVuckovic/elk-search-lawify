@@ -2,7 +2,9 @@
 using Lawify.Search.Api.ElasticSearch.Languages.Serbian;
 using Lawify.Search.Api.ElasticSearch.Mappings;
 using Lawify.Search.Api.Features.SerbianSearch.Contracts;
+using Lawify.Search.Api.Features.SerbianSearch.Contracts.CreateIndex;
 using Lawify.Search.Api.Features.SerbianSearch.Laws;
+using Lawify.Search.Api.Features.SerbianSearch.Laws.CreateIndex;
 using Microsoft.Extensions.Options;
 using Serilog;
 

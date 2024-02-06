@@ -16,11 +16,11 @@ public record SerbianContractIndex
     public string? GovernmentStreet{ get; set; }
     public string? GovernmentStreetNumber { get; set; }
     public string? GovernmentCity{ get; set; }
-    public string? GovernmentFullAddress { get; set; }
+    public string? GovernmentAddress { get; set; }
     #endregion
 
     #region GovernmentInfo
-    public string? GovernmentAdministrationLevel { get; set; }
+    public string? GovernmentLevel { get; set; }
     public string? GovernmentName { get; set; }
     public string? GovernmentPhone { get; set; }
     public string? GovernmentEmail { get; set; }
@@ -33,7 +33,7 @@ public record SerbianContractIndex
     public string? AgencyStreet { get; set; }
     public string? AgencyStreetNumber { get; set; }
     public string? AgencyCity { get; set; }
-    public string? AgencyFullAddress { get; set; }
+    public string? AgencyAddress { get; set; }
     #endregion
 
     #region AgencyInfo

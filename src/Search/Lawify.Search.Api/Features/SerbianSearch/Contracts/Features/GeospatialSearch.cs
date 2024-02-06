@@ -1,7 +1,7 @@
 ﻿using Elastic.Clients.Elasticsearch;
 using MediatR;
 
-namespace Lawify.Search.Api.Features.SerbianSearch.Contracts.Feature;
+namespace Lawify.Search.Api.Features.SerbianSearch.Contracts.Features;
 
 public class GeospatialSearch
 {

@@ -3,7 +3,7 @@ using Lawify.Search.Api.Features.SerbianSearch.Contracts.DomainEvents;
 using Lawify.Search.Api.Features.SerbianSearch.Contracts.Factories;
 using MediatR;
 
-namespace Lawify.Search.Api.Features.SerbianSearch.Contracts.Feature.Create;
+namespace Lawify.Search.Api.Features.SerbianSearch.Contracts.Features.Create;
 
 public class CreateSerbianContractHandler(
     ElasticsearchClient elasticsearchClient,

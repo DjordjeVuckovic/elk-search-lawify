@@ -1,11 +1,9 @@
-﻿using System.Reflection.Metadata;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using CSharpFunctionalExtensions;
 using Lawify.Common.Common.PreProcessor;
 using Lawify.ContentDispatchingProcessor.Common.Files;
 using Lawify.ContentDispatchingProcessor.ProcessContent.ContentExtractors.Contracts.Models;
 using Lawify.ContentDispatchingProcessor.ProcessContent.ContentExtractors.Models;
-using Serilog;
 
 namespace Lawify.ContentDispatchingProcessor.ProcessContent.ContentExtractors.Contracts;
 
@@ -118,9 +116,9 @@ public class PdfContractExtractor(ILogger<PdfContractExtractor> logger) : IConte
         tagsDictionary.Add("NASLOV", title);
 
 
-
+        const string agencyTextConst = "u daljem tekstu agencija";
         int contentStartIndex = inputText
-            .LastIndexOf("tekstu agencija", StringComparison.Ordinal);
+            .LastIndexOf(agencyTextConst, StringComparison.Ordinal) + agencyTextConst.Length;
 
         if (contentStartIndex == -1) {
             contentStartIndex = 0;
@@ -213,16 +211,16 @@ public class PdfContractExtractor(ILogger<PdfContractExtractor> logger) : IConte
 
         extractedValues.TryGetValue("SADRZAJ", out var content);
         document.Content = content is not null
-            ? content.PreProcessWithoutSpecialChars() : "";
+            ? content.PreProcessWithSpecialChars() : "";
 
         extractedValues.TryGetValue("VLADA_POTPIS", out var govSign);
         extractedValues.TryGetValue("AGECIJA_POTPIS", out var agSign);
-        var gov = govSign?.PreProcessWithoutSpecialChars();
+        var gov = govSign?.PreProcessWithSpecialChars();
         var govNameSurname = GetNameAndSurname(gov);
         var governmentSign = new SignatureExtracted(govNameSurname.Item1, govNameSurname.Item2, gov);
         document.ClientSign = governmentSign;
 
-        var ag = agSign?.PreProcessWithoutSpecialChars();
+        var ag = agSign?.PreProcessWithSpecialChars();
         var agNameSurname = GetNameAndSurname(ag);
         var agencySign = new SignatureExtracted(agNameSurname.Item1, agNameSurname.Item2, ag);
         document.AgencySign = agencySign;

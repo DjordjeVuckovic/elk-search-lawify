@@ -1,0 +1,16 @@
+.file-card{
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  gap: .5rem;
+  justify-content: center;
+  align-items: center;
+  background: #222529;
+  border: 4px solid var(--primary-color);
+  border-radius: 12px;
+  color: var(--text-color);
+  img{
+    width: 64px;
+    height: 64px;
+  }
+}

@@ -91,6 +91,11 @@ body{
   gap: 1rem;
   grid-template-columns: 1fr 1fr;
 }
+.grid-3-c{
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 1fr 1fr;
+}
 .primary-text {
   color: #1f3e72;
   font-weight: bold;
@@ -101,7 +106,7 @@ body{
   font-weight: bold;
   font-size: 1.2rem;
 }
-.white-text{
+.main-text{
   color: $text-color;
 }
 .secondary-text {
@@ -116,7 +121,41 @@ body{
   color-scheme: dark;
   color: $text-color;
   background: $primary-black-bg;
-  padding: 1rem;
+  padding: .8rem 1rem .8rem 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  width: 300px;
+  border-radius: 8px;
+  &::placeholder{
+    color: $text-color;
+  }
+  &:focus{
+    border: 2px solid $secondary-color-blue;
+    outline: none;
+  }
+}
+
+.input-large {
+  color-scheme: dark;
+  color: $text-color;
+  background: $primary-black-bg;
+  padding: .8rem 1rem .8rem 1rem;
+  width: 600px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  &::placeholder{
+    color: $text-color;
+  }
+  &:focus{
+    border: 2px solid $secondary-color-blue;
+    outline: none;
+  }
+}
+
+.select-base{
+  color-scheme: dark;
+  color: $text-color;
+  background: $primary-black-bg;
+  padding: .5rem 1.5rem .5rem 1.5rem;
   border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 8px;
   &::placeholder{
@@ -148,6 +187,11 @@ body{
     background: $blue-gradient-hover;
     box-shadow: 0 0 .7em $black;
   }
+}
+.input-group{
+  border: 2px solid var(--primary-color);
+  padding: .4rem;
+  border-radius: 8px;
 }
 .btn-large{
   width: 20%;

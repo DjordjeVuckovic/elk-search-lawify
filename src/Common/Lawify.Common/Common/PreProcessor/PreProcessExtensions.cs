@@ -4,22 +4,23 @@ namespace Lawify.Common.Common.PreProcessor;
 
 public static partial class PreProcessExtensions
 {
-    public static string PreProcessWithoutSpecialChars(this string content)
+    public static string PreProcessWithSpecialChars(this string content)
     {
-        var withoutSpecialChars = SpecialCharactersRegex().Replace(
-            content.Trim(), " ");
-        var normalizedSpaces = SingleSpace()
-            .Replace(withoutSpecialChars.Trim(), " ");
+        // var withoutSpecialChars = SpecialCharactersRegex().Replace(
+        //     content.Trim(), " ");
 
-        return normalizedSpaces;
+        // var normalizedSpaces = SingleSpace()
+        //     .Replace(content.Trim(), " ");
+
+        return content;
     }
     public static string PreProcessText(this string content)
     {
-        var withoutHtml = HtmlCharRegex().Replace(content, string.Empty);
+        // var withoutHtml = HtmlCharRegex().Replace(content, string.Empty);
+        //
+        // var decodedHtml = System.Net.WebUtility.HtmlDecode(withoutHtml);
 
-        var decodedHtml = System.Net.WebUtility.HtmlDecode(withoutHtml);
-
-        return decodedHtml.PreProcessWithoutSpecialChars();
+        return content.PreProcessWithSpecialChars();
     }
 
     [GeneratedRegex("<.*?>")]

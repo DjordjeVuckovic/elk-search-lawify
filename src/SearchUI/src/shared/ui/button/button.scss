@@ -1,0 +1,21 @@
+.button{
+  background: var(--primary-color);
+  align-items: center;
+  justify-content: center;
+  border: none;
+  color: var(--text-color);
+  padding: .5rem;
+  font-weight: bold;
+  font-size: 14px;
+  border-radius: 26px;
+  width: 10rem;
+  &:disabled{
+    background: darkgrey;
+    cursor: not-allowed;
+  }
+  &:hover:enabled{
+    cursor: pointer;
+    scale: 1.03;
+    transition: .1s ease-in-out;
+  }
+}
