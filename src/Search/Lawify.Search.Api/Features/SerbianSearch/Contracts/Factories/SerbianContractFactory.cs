@@ -66,7 +66,58 @@ public class SerbianContractFactory
             contractHitResponse.GovernmentSignatureFullName,
             contractHitResponse.GovernmentPhone,
             contractHitResponse.GovernmentEmail,
-            contractHitResponse.GovernmentAddress
+            contractHitResponse.GovernmentAddress,
+            null
         );
+
+    public static ContractHitResponse ToGeoApi(
+        SerbianContractIndex contractHitResponse,
+        string? highlight)
+    {
+
+        contractHitResponse.GeoLocation?.TryGetLatitudeLongitude(out var latLng);
+        if (contractHitResponse.GeoLocation?.TryGetLatitudeLongitude(out latLng) is not null)
+        {
+            return new(
+                contractHitResponse.GovernmentName,
+                contractHitResponse.GovernmentLevel,
+                contractHitResponse.AgencySignatureName,
+                contractHitResponse.AgencySignatureSurname,
+                contractHitResponse.AgencySignatureFullName,
+                highlight,
+                contractHitResponse.Content,
+                contractHitResponse.Id,
+                contractHitResponse.FileName,
+                contractHitResponse.Metadata,
+                contractHitResponse.GovernmentSignatureName,
+                contractHitResponse.GovernmentSignatureSurname,
+                contractHitResponse.GovernmentSignatureFullName,
+                contractHitResponse.GovernmentPhone,
+                contractHitResponse.GovernmentEmail,
+                contractHitResponse.GovernmentAddress,
+                new Shared.Types.GeoLocation(latLng.Lat, latLng.Lon)
+            );
+        }
+
+        return new(
+            contractHitResponse.GovernmentName,
+            contractHitResponse.GovernmentLevel,
+            contractHitResponse.AgencySignatureName,
+            contractHitResponse.AgencySignatureSurname,
+            contractHitResponse.AgencySignatureFullName,
+            highlight,
+            contractHitResponse.Content,
+            contractHitResponse.Id,
+            contractHitResponse.FileName,
+            contractHitResponse.Metadata,
+            contractHitResponse.GovernmentSignatureName,
+            contractHitResponse.GovernmentSignatureSurname,
+            contractHitResponse.GovernmentSignatureFullName,
+            contractHitResponse.GovernmentPhone,
+            contractHitResponse.GovernmentEmail,
+            contractHitResponse.GovernmentAddress,
+            null
+        );
+    }
 
 }

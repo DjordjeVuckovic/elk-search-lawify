@@ -1,5 +1,5 @@
 import {httpSearchClient} from "../http-client/http-client.ts";
-import {BasicSearch, ContractHit} from "./types/contract.ts";
+import {BasicSearch, ContractHit, GeoSearchRequest} from "./types/contract.ts";
 
 export const fetchContracts = async (): Promise<ContractHit[]> => {
     const response =
@@ -19,8 +19,15 @@ export const boolSearchContracts = async (searchInput: string): Promise<Contract
     return response.data;
 }
 
-export const geoSearch = async (id: string): Promise<ContractHit> => {
-    const response =
-        await httpSearchClient.get(`/api/v1/serbian-contracts/${id}`);
-    return response.data;
+export const geoSearch = async (geoSearch: GeoSearchRequest): Promise<ContractHit[]> => {
+    try {
+        const response =
+            await httpSearchClient
+                .get(`/api/v1/serbian-contracts/geospatial-search?lat=${geoSearch.lat}&lon=${geoSearch.lon}&radiusM=${geoSearch.radiusM}`);
+        return response.data;
+    }
+    catch (error) {
+        console.error(error);
+        return []
+    }
 }

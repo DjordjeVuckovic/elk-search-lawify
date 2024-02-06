@@ -63,7 +63,7 @@ public class GeospatialSearch
             if (hit.Highlight is not null && hit.Highlight.ContainsKey(hitHighlightKey)) {
                 var highlightStrings = hit.Highlight[hitHighlightKey].ToList();
                 var highlight = "..." + string.Join(" ", highlightStrings) + "...";
-                var hitResponse = SerbianContractFactory.ToApi(hit.Source, highlight);
+                var hitResponse = SerbianContractFactory.ToGeoApi(hit.Source, highlight);
                 hitResponses.Add(hitResponse);
             }
 
@@ -71,7 +71,7 @@ public class GeospatialSearch
                 var highlight = hit.Source!.Content.Length > 150
                     ? hit.Source.Content[..150] + "..."
                     : hit.Source.Content;
-                var hitResponse = SerbianContractFactory.ToApi(hit.Source, highlight);
+                var hitResponse = SerbianContractFactory.ToGeoApi(hit.Source, highlight);
                 hitResponses.Add(hitResponse);
             }
         });

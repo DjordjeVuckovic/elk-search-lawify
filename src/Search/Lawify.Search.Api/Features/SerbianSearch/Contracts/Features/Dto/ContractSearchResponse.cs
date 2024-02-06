@@ -23,5 +23,6 @@ public record ContractHitResponse(
     string? GovernmentSignatureFullName,
     string? GovernmentPhone,
     string? GovernmentEmail,
-    string? GovernmentAddress
+    string? GovernmentAddress,
+    GeoLocation? GeoLocation
 );

@@ -1,3 +1,3 @@
 ﻿namespace Lawify.Search.Api.Features.SerbianSearch.Shared.Types;
 
-public record GeoLocation(double Lat, double Lon);
+public record GeoLocation(double Lat, double Lng);

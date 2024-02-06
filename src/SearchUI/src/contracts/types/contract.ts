@@ -17,6 +17,7 @@ export type ContractHit = {
   governmentPhone?: string | null;
   governmentEmail?: string | null;
   governmentAddress?: string | null;
+  geoLocation?: GeoLocation;
 };
 
 export type BasicSearch = {
@@ -29,6 +30,13 @@ export type BoolSearch = {
     boolSearch: string;
 }
 
-export type GeoSearch = {
-    id: string;
+export type GeoSearchRequest = {
+    lat: number;
+    lon: number;
+    radiusM: number;
+}
+
+export type GeoLocation = {
+    lat: number;
+    lng: number;
 }

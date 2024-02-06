@@ -53,8 +53,8 @@ public static class BasicSearch
                             .Add(request.Field, new HighlightField
                             {
                                 Type = HighlighterType.Plain,
-                                NumberOfFragments = 150,
-                                FragmentSize = 300
+                                NumberOfFragments = 80,
+                                FragmentSize = 250
                             }))
                     ), cancellationToken);
             if (!searchResponse.IsValidResponse)
