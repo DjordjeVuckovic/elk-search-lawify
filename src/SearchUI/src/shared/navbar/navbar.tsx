@@ -18,6 +18,7 @@ export const Navbar = () => {
                  <NavLink url={''}>Home</NavLink>
                  {<NavLink url={'/laws'}>Laws</NavLink>}
                  {<NavLink url={'/contracts'}>Contracts</NavLink>}
+                 {<NavLink url={'/contracts-geospatial'}>GeoSpatial</NavLink>}
              </div>
              <div className='flex-end navbar-menu-end'>
 

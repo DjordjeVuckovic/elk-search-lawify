@@ -42,7 +42,7 @@ public static class BoolSearch
             if (!hitsResponse.IsValidResponse)
                 return Result.Failure<ContractSearchResponse>("Elastic cannot apply bool search!");
             var hits = hitsResponse.Hits.ToList();
-            var result = CreateSearchResponse(hits);
+            var result = ToSearchResponse(hits, Content);
             return result;
         }
 
@@ -55,28 +55,6 @@ public static class BoolSearch
             if (request.Contains(NotSplitOperatorOnEnd))
                 return ParseNotQuery(request[4..]);
             return ParseBasicSearch(request);
-        }
-
-        private ContractSearchResponse CreateSearchResponse(List<Hit<SerbianContractIndex>> hits)
-        {
-            var hitResponses = new List<ContractHitResponse>();
-            hits.ForEach(hit => {
-                if (hit.Highlight is not null && hit.Highlight.ContainsKey(Content)) {
-                    var highlightStrings = hit.Highlight[Content].ToList();
-                    var highlight = "..." + string.Join(" ", highlightStrings) + "...";
-                    var hitResponse = SerbianContractFactory.ToApi(hit.Source, highlight);
-                    hitResponses.Add(hitResponse);
-                }
-
-                if (hit.Highlight is null || !hit.Highlight.ContainsKey(Content)) {
-                    var highlight = hit.Source!.Content.Length > 150
-                        ? hit.Source.Content[..150] + "..."
-                        : hit.Source.Content;
-                    var hitResponse = SerbianContractFactory.ToApi(hit.Source, highlight);
-                    hitResponses.Add(hitResponse);
-                }
-            });
-            return new ContractSearchResponse(hitResponses, hits.Count);
         }
 
         private SearchQuery BuildQuery(ISearchExpression expression)
@@ -131,5 +109,26 @@ public static class BoolSearch
             boolQuery.BoolQueryFields = expressions;
             return new SearchExpression { BoolQueryExpression = boolQuery };
         }
+    }
+    public static ContractSearchResponse ToSearchResponse(List<Hit<SerbianContractIndex>> hits, string hitHighlightKey)
+    {
+        var hitResponses = new List<ContractHitResponse>();
+        hits.ForEach(hit => {
+            if (hit.Highlight is not null && hit.Highlight.ContainsKey(hitHighlightKey)) {
+                var highlightStrings = hit.Highlight[hitHighlightKey].ToList();
+                var highlight = "..." + string.Join(" ", highlightStrings) + "...";
+                var hitResponse = SerbianContractFactory.ToApi(hit.Source, highlight);
+                hitResponses.Add(hitResponse);
+            }
+
+            if (hit.Highlight is null || !hit.Highlight.ContainsKey(hitHighlightKey)) {
+                var highlight = hit.Source!.Content.Length > 150
+                    ? hit.Source.Content[..150] + "..."
+                    : hit.Source.Content;
+                var hitResponse = SerbianContractFactory.ToApi(hit.Source, highlight);
+                hitResponses.Add(hitResponse);
+            }
+        });
+        return new ContractSearchResponse(hitResponses, hits.Count);
     }
 }

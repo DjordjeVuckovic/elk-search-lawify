@@ -28,3 +28,7 @@ export type BasicSearch = {
 export type BoolSearch = {
     boolSearch: string;
 }
+
+export type GeoSearch = {
+    id: string;
+}

@@ -39,7 +39,7 @@ public static class BasicSearch
                 if (!searchResponsePhrase.IsValidResponse)
                     return Result.Failure<ContractSearchResponse>("Something went wrong with searching contracts");
                 var hitsPhrase = searchResponsePhrase.Hits.ToList();
-                var responsePhrase = CreateSearchResponse(hitsPhrase,request);
+                var responsePhrase = ToSearchResponse(hitsPhrase,request);
                 return responsePhrase;
             }
             var searchResponse = await client.SearchAsync<SerbianContractIndex>(s => s
@@ -60,11 +60,11 @@ public static class BasicSearch
             if (!searchResponse.IsValidResponse)
                 return Result.Failure<ContractSearchResponse>("Something went wrong with searching contracts");
             var hits = searchResponse.Hits.ToList();
-            var response = CreateSearchResponse(hits,request);
+            var response = ToSearchResponse(hits,request);
             return response;
         }
 
-        private ContractSearchResponse CreateSearchResponse(List<Hit<SerbianContractIndex>> hits, Query request)
+        private static ContractSearchResponse ToSearchResponse(List<Hit<SerbianContractIndex>> hits, Query request)
         {
             var hitResponses = new List<ContractHitResponse>();
             hits.ForEach(hit =>

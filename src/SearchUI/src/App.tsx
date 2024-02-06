@@ -9,6 +9,7 @@ import {Contracts} from "./contracts/contracts.tsx";
 import {LawPage} from "./laws/law-page.tsx";
 import {Toaster} from "react-hot-toast";
 import {ContractPage} from "./contracts/contract-page.tsx";
+import {GeoSearchComponent} from "./contracts/geo-search.tsx";
 const queryClient = new QueryClient();
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
                     <Route path={'/laws/item'} element={ <LawPage /> } />
                     <Route path={'/contracts'} element={ <Contracts /> } />
                     <Route path={'/contracts/item'} element={ <ContractPage /> } />
+                    <Route path={'/contracts-geospatial'} element={ <GeoSearchComponent /> } />
                 </Routes>
             </Body>
             <Toaster position="bottom-center"

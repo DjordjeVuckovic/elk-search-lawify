@@ -1,5 +1,5 @@
-﻿using Lawify.Search.Api.Features.SerbianSearch.Contracts.Types;
-using Lawify.Search.Api.Features.SerbianSearch.Shared.Types;
+﻿using Lawify.Search.Api.Features.SerbianSearch.Shared.Types;
+using GeoLocation = Elastic.Clients.Elasticsearch.GeoLocation;
 
 namespace Lawify.Search.Api.Features.SerbianSearch.Contracts;
 

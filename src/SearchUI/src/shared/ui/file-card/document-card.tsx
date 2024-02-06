@@ -11,7 +11,6 @@ export type FileCardProps = {
 import './document-card.scss';
 import {FaArrowDown, FaStreetView} from "react-icons/fa";
 export const DocumentCard = (props : FileCardProps) => {
-    console.log(props)
     return (
         <div className={'file-card padding-base mg-t-1'}>
             <img src={props.imageRef} alt={'i'}/>

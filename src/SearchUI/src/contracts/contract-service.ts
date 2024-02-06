@@ -18,3 +18,9 @@ export const boolSearchContracts = async (searchInput: string): Promise<Contract
         await httpSearchClient.get(`/api/v1/serbian-contracts/bool-search?query=${searchInput}`);
     return response.data;
 }
+
+export const geoSearch = async (id: string): Promise<ContractHit> => {
+    const response =
+        await httpSearchClient.get(`/api/v1/serbian-contracts/${id}`);
+    return response.data;
+}

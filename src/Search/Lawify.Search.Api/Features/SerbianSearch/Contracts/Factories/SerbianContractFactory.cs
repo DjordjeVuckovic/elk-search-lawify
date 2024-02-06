@@ -1,8 +1,8 @@
 ﻿using Lawify.Common.Common.PreProcessor;
 using Lawify.Messaging.Events.Contracts;
 using Lawify.Search.Api.Features.SerbianSearch.Contracts.Features.Dto;
-using Lawify.Search.Api.Features.SerbianSearch.Contracts.Types;
 using Lawify.Search.Api.Features.SerbianSearch.Shared.Types;
+using GeoLocation = Elastic.Clients.Elasticsearch.GeoLocation;
 
 namespace Lawify.Search.Api.Features.SerbianSearch.Contracts.Factories;
 
@@ -68,4 +68,5 @@ public class SerbianContractFactory
             contractHitResponse.GovernmentEmail,
             contractHitResponse.GovernmentAddress
         );
+
 }
