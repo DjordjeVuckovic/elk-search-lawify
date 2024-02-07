@@ -1,9 +1,152 @@
 ﻿version: '3.8'
-name: 'lawify-container'
-services: 
+name: 'elk-search-lawify'
+services:
   search-api:
+    image: ${DOCKER_REGISTRY-}lawify-search-api:latest
     build: 
-        context: ./src
-        dockerfile: Search/Lawify.Search.Api/Dockerfile
+        context: .
+        dockerfile: src/Search/Lawify.Search.Api/Dockerfile
+    env_file:
+      - src/Search/Lawify.Search.Api/.env.container
     ports:
       - "5241:8080"
+    networks:
+      - search-net
+  content-api:
+    image: ${DOCKER_REGISTRY-}lawify-content-api:latest
+    build:
+      context: .
+      dockerfile: src/Content/Lawify.Content.Api/Dockerfile
+    env_file:
+      - src/Content/Lawify.Content.Api/.env.container
+    ports:
+      - "5119:8080"
+    networks:
+      - search-net
+  content-dispatching-processor:
+    image: ${DOCKER_REGISTRY-}lawify-content-dispatching-processor:latest
+    build: 
+        context: .
+        dockerfile: src/ContentDispatchingProcessor/Lawify.ContentDispatchingProcessor/Dockerfile
+    env_file:
+      - src/ContentDispatchingProcessor/Lawify.ContentDispatchingProcessor/.env.container
+    ports:
+      - "5195:8080"
+    networks:
+      - search-net
+  search-ui:
+    image: ${DOCKER_REGISTRY-}lawify-search-ui:latest
+    build:
+      context: src/SearchUI
+      args:
+        - BUILD_MODE=container
+    env_file:
+      - src/SearchUI/.env.container
+    ports:
+      - "5172:80"
+    networks:
+      - search-net
+  # Infrastructure
+  
+  # Elasticsearch
+  elk-elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.12.0
+    container_name: elk-elasticsearch
+    hostname: elk-elasticsearch
+    environment:
+      bootstrap.memory_lock: true
+      discovery.type: single-node
+      xpack.security.enabled: false
+    ports:
+      - "9200:9200"
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    networks:
+      - search-net
+
+  # Kibana
+  elk-kibana:
+    image: docker.elastic.co/kibana/kibana:8.12.0
+    container_name: elk-kibana
+    ports:
+      - "5601:5601"
+    environment:
+      ELASTICSEARCH_URL: elk-elasticsearch:9200
+      ELASTICSEARCH_HOSTS: '["http://elk-elasticsearch:9200"]'
+    networks:
+      - search-net
+    depends_on:
+      - elk-elasticsearch
+
+  # Logstash
+  elk-logstash:
+    image: docker.elastic.co/logstash/logstash:8.12.0
+    container_name: elk-logstash
+    ports:
+      - "5044:5044"
+      - "5000:5000/tcp"
+      - "5000:5000/udp"
+      - "9600:9600"
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    volumes:
+      - ./configs/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+      - ./configs/logstash/pipeline:/usr/share/logstash/pipeline:ro
+    networks:
+      - search-net
+    depends_on:
+      - elk-elasticsearch
+  
+  # Minio Object storage
+  minio-content-storage:
+    image: quay.io/minio/minio
+    container_name: minio-content-storage
+    command: server --console-address ":9001" --address ":9000" /data
+    environment:
+      MINIO_ROOT_USER: 'user'
+      MINIO_ROOT_PASSWORD: 'password123'
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - content-storage-data:/data
+    networks:
+      - search-net
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://127.0.0.1:9000/minio/health/live" ]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+  # rabbitmq
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq
+    hostname: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: user
+      RABBITMQ_DEFAULT_VHOST: "/"
+    volumes:
+      - rabbitmq-content-data:/var/lib/rabbitmq
+      - rabbitmq-content-logs:/var/log/rabbitmq
+    restart: unless-stopped
+    networks:
+      - search-net
+
+networks:
+  search-net:
+    driver: bridge
+volumes:
+  elasticsearch-data:
+    driver: local
+  content-storage-data:
+    driver: local
+  lawify-pg-mq-data:
+    driver: local
+  rabbitmq-content-data:
+    driver: local
+  rabbitmq-content-logs:
+    driver: local

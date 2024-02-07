@@ -7,17 +7,26 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["ContentDispatchingProcessor/Lawify.ContentDispatchingProcessor.Api/Lawify.ContentDispatchingProcessor.Api.csproj", "ContentDispatchingProcessor/Lawify.ContentDispatchingProcessor.Api/"]
-RUN dotnet restore "ContentDispatchingProcessor/Lawify.ContentDispatchingProcessor.Api/Lawify.ContentDispatchingProcessor.Api.csproj"
-COPY . .
-WORKDIR "/src/ContentDispatchingProcessor/Lawify.ContentDispatchingProcessor.Api"
-RUN dotnet build "Lawify.ContentDispatchingProcessor.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
+COPY ["src/ContentDispatchingProcessor/Lawify.ContentDispatchingProcessor/Lawify.ContentDispatchingProcessor.csproj", "ContentDispatchingProcessor/Lawify.ContentDispatchingProcessor/"]
+#common
+COPY ["src/Common/Lawify.Common/Lawify.Common.csproj", "Common/Lawify.Common/"]
+COPY ["src/Common/Lawify.Messaging.Events/Lawify.Messaging.Events.csproj", "Common/Lawify.Messaging.Events/"]
+
+RUN dotnet restore "ContentDispatchingProcessor/Lawify.ContentDispatchingProcessor/Lawify.ContentDispatchingProcessor.csproj"
+
+COPY ["src/ContentDispatchingProcessor/Lawify.ContentDispatchingProcessor/", "ContentDispatchingProcessor/Lawify.ContentDispatchingProcessor/"]
+#common
+COPY ["src/Common/Lawify.Common/", "Common/Lawify.Common/"]
+COPY ["src/Common/Lawify.Messaging.Events/", "Common/Lawify.Messaging.Events/"]
+
+WORKDIR "ContentDispatchingProcessor/Lawify.ContentDispatchingProcessor"
+RUN dotnet build "Lawify.ContentDispatchingProcessor.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "Lawify.ContentDispatchingProcessor.Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Lawify.ContentDispatchingProcessor.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Lawify.ContentDispatchingProcessor.Api.dll"]
+ENTRYPOINT ["dotnet", "Lawify.ContentDispatchingProcessor.dll"]

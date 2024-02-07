@@ -1,1 +1,2 @@
-# elk-search-lawify
+# Elastic search laws and contracts
+
