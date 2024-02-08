@@ -1,6 +1,15 @@
 ﻿version: '3.8'
 name: 'elk-search-lawify'
 services:
+  api-gateway:
+    image: ${DOCKER_REGISTRY-}lawify-api-gateway:latest
+    build: 
+        context: .
+        dockerfile: src/ApiGateway/Lawify.ApiGateway/Dockerfile
+    ports:
+      - "5000:8080"
+    networks:
+      - search-net
   search-api:
     image: ${DOCKER_REGISTRY-}lawify-search-api:latest
     build: 
