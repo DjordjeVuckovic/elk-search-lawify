@@ -18,7 +18,7 @@ COPY ["src/Search/Lawify.Search.Api/", "Search/Lawify.Search.Api/"]
 COPY ["src/Common/Lawify.Common/", "Common/Lawify.Common/"]
 COPY ["src/Common/Lawify.Messaging.Events/", "Common/Lawify.Messaging.Events/"]
 
-WORKDIR "Search/Lawify.Search.Api"
+WORKDIR "/src/Search/Lawify.Search.Api"
 RUN dotnet build "Lawify.Search.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish

@@ -19,7 +19,7 @@ COPY ["src/ContentDispatchingProcessor/Lawify.ContentDispatchingProcessor/", "Co
 COPY ["src/Common/Lawify.Common/", "Common/Lawify.Common/"]
 COPY ["src/Common/Lawify.Messaging.Events/", "Common/Lawify.Messaging.Events/"]
 
-WORKDIR "ContentDispatchingProcessor/Lawify.ContentDispatchingProcessor"
+WORKDIR "/src/ContentDispatchingProcessor/Lawify.ContentDispatchingProcessor"
 RUN dotnet build "Lawify.ContentDispatchingProcessor.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
